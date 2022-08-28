@@ -12,6 +12,5 @@ namespace Context
 
         public DbSet<Account> Accounts { get; set; }
 
-
     }
 }

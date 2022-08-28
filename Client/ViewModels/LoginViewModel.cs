@@ -8,7 +8,6 @@ namespace Client.ViewModels
 {
     public class LoginViewModel:BaseViewModel
     {
-        private NavigationStore _navigationStore;
         private string _username = "";
         
         public string Username
@@ -37,10 +36,9 @@ namespace Client.ViewModels
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(IAuthenticator authenticator,NavigationStore navigationStore)
+        public LoginViewModel()
         {
-            _navigationStore = navigationStore;
-            LoginCommand = new LoginCommand(this,authenticator,_navigationStore);
+            LoginCommand = new LoginCommand(this);
         }
     }
 }

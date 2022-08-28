@@ -17,18 +17,11 @@ namespace Client.Services.Concretes
         {
             AccountDto account = null;
             
-            Task task = new Task(() =>
-            {
-                ChannelFactory<ILoginHandler> factory = new ChannelFactory<ILoginHandler>(new NetTcpBinding(), _endpointAddress);
+            ChannelFactory<ILoginHandler> factory = new ChannelFactory<ILoginHandler>(new NetTcpBinding(), _endpointAddress);
 
-                var proxy = factory.CreateChannel();
+            var proxy = factory.CreateChannel();
                 
-                account = proxy.Login(username, password);    
-            });
-            
-            task.Start();
-
-            await task;
+            account = await proxy.Login(username, password);
 
             return account;
         }

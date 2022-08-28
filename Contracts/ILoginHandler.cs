@@ -1,4 +1,5 @@
 using System.ServiceModel;
+using System.Threading.Tasks;
 using DTO;
 
 namespace Contracts
@@ -7,6 +8,6 @@ namespace Contracts
     public interface ILoginHandler
     {
         [OperationContract]
-        AccountDto Login(string username, string password);
+        Task<AccountDto> Login(string username, string password);
     }
 }

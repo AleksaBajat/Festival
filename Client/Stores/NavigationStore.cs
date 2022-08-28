@@ -1,4 +1,5 @@
 using System;
+using Client.Factories;
 using Client.State.Authentication;
 using Client.ViewModels;
 
@@ -6,8 +7,8 @@ namespace Client.Stores
 {
     public class NavigationStore
     {
-        private IAuthenticator _authenticator;
         private BaseViewModel _currentViewModel;
+        private readonly IViewModelFactory _viewModelFactory;
 
         public BaseViewModel CurrentViewModel
         {
@@ -19,10 +20,9 @@ namespace Client.Stores
             }
         }
         
-        public NavigationStore(IAuthenticator authenticator)
+        public NavigationStore()
         {
-            _authenticator = authenticator;
-            _currentViewModel = new LoginViewModel(authenticator, this);
+            _currentViewModel = new LoginViewModel();
         }
         
         public event Action CurrentViewModelChanged;

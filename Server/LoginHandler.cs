@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Context;
 using Context.Models;
@@ -16,7 +17,7 @@ namespace Server
             _festivalContext = new FestivalContext();
         }
         
-        public AccountDto Login(string username, string password)
+        public Task<AccountDto> Login(string username, string password)
         {
             var account =
                 _festivalContext.Accounts.FirstOrDefault(acc => acc.Username == username && acc.Password == password);
@@ -32,7 +33,7 @@ namespace Server
                 };
             }
 
-            return result;
+            return Task.FromResult(result);
         }
     }
 }

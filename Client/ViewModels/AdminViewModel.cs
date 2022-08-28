@@ -1,4 +1,6 @@
 using System.Windows.Input;
+using Client.Commands;
+using Client.State.Authentication;
 
 namespace Client.ViewModels
 {
@@ -9,17 +11,6 @@ namespace Client.ViewModels
         private string _username;
         private string _password;
         private bool _isAdmin;
-        private bool _isUser;
-
-        public bool IsUser
-        {
-            get => _isUser;
-            set
-            {
-                _isUser = value;
-                OnPropertyChanged(nameof(IsUser));
-            }
-        }
 
         public bool IsAdmin
         {
@@ -75,7 +66,8 @@ namespace Client.ViewModels
 
         public AdminViewModel()
         {
-            
+            RegisterCommand = new RegisterCommand(this);
+        
         }
 
 

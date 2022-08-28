@@ -14,8 +14,10 @@ namespace Context.Models
         
         public string Password { get; set; }
         
+        public string Name { get; set; }
+        
+        public string LastName { get; set; }
         public UserRole Role { get; set; }
-
         public Account() {}
     }
 }

@@ -5,6 +5,7 @@ using Client.Models;
 using Client.Services.Abstractions;
 using Client.Services.Concretes;
 using Client.State.Authentication;
+using Client.State.Resolver;
 using Client.Stores;
 using Client.ViewModels;
 
@@ -29,13 +30,17 @@ namespace Client
 
             _container = new WindsorContainer();
 
-            _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>());
-            _container.Register(Component.For<IAuthenticator>().ImplementedBy<Authenticator>().LifestyleSingleton());
             _container.Register(Component.For<NavigationStore>().LifestyleSingleton());
+            _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>());
+            _container.Register(Component.For<IRegisterService>().ImplementedBy<RegisterService>());
+            _container.Register(Component.For<IAuthenticator>().ImplementedBy<Authenticator>().LifestyleSingleton());
+            
+
+            DependencyResolver.Container = _container;
 
             _container.ResolveAll<MainWindow>();
 
-            var navigationStore = _container.Resolve<NavigationStore>();
+            var navigationStore = _container.Resolve<NavigationStore>();            
             
             MainWindow = new MainWindow()
             {
