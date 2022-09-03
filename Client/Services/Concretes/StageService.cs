@@ -23,14 +23,26 @@ namespace Client.Services.Concretes
             throw new NotImplementedException();
         }
 
-        public Task Duplicate(int id)
+        public async Task Duplicate(StageViewModel stage)
         {
-            throw new NotImplementedException();
+            ChannelFactory<IStageHandler> factory = new ChannelFactory<IStageHandler>(new NetTcpBinding(), _endpointAddress);
+
+            var proxy = factory.CreateChannel();
+
+            var model = ConvertVmToDto(stage);
+
+            await proxy.Duplicate(model);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(StageViewModel stage)
         {
-            throw new NotImplementedException();
+            ChannelFactory<IStageHandler> factory = new ChannelFactory<IStageHandler>(new NetTcpBinding(), _endpointAddress);
+
+            var proxy = factory.CreateChannel();
+
+            var model = ConvertVmToDto(stage);
+
+            await proxy.Delete(model);
         }
 
         public Task Update(StageViewModel entity)
@@ -69,6 +81,18 @@ namespace Client.Services.Concretes
                 StageId = dto.StageId,
                 Name = dto.Name,
                 Version = dto.Version
+            };
+
+            return conversionResult;
+        }
+
+        private StageDto ConvertVmToDto(StageViewModel viewModel)
+        {
+            StageDto conversionResult = new StageDto
+            {
+                StageId = viewModel.StageId,
+                Name = viewModel.Name,
+                Version = viewModel.Version
             };
 
             return conversionResult;

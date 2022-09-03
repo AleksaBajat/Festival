@@ -42,6 +42,7 @@
     <Compile Include="AccountDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageDto.cs" />
+    <Compile Include="TimeSlotDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

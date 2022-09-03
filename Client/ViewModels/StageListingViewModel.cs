@@ -20,6 +20,25 @@ namespace Client.ViewModels
 
         private bool _isAdmin;
 
+        private StageViewModel _selected;
+
+        public StageViewModel Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                OnPropertyChanged(nameof(Selected));
+                ((BaseCommand)TimeStampsCommand).OnCanExecuteChanged();
+                ((UndoBaseCommand)DeleteCommand).OnCanExecuteChanged();
+                ((UndoBaseCommand)DuplicateCommand).OnCanExecuteChanged();
+                ((BaseCommand)EditCommand).OnCanExecuteChanged();
+            }
+        }
+
         public IEnumerable<StageViewModel> Stages => _stages;
 
         public bool IsAdmin
@@ -40,14 +59,33 @@ namespace Client.ViewModels
 
         public ICommand LogoutCommand { get; set; }
 
-        public ICommand Refresh { get; set; }
+        public ICommand RefreshCommand { get; set; }
+
+        public ICommand TimeStampsCommand { get; set; }
+
+        public ICommand DuplicateCommand { get; set; }
+
+        public ICommand DeleteCommand { get; set; }
+
+        public ICommand EditCommand { get; set; }
+
+        public ICommand AddCommand { get; set; }
 
         public StageListingViewModel(IAuthenticator authenticator)
         {
             _authenticator = authenticator;
             _stages = new ObservableCollection<StageViewModel>();
+
             LogoutCommand = new LogoutCommand();
-            Refresh = new RefreshStagesCommand(_stages);
+            RefreshCommand = new RefreshStagesCommand(_stages);
+            NavigateAdminCommand = new NavigateAdminCommand();
+            TimeStampsCommand = new TimeStampsCommand(this);
+            DuplicateCommand = new DuplicateStageCommand(this);
+            DeleteCommand = new DeleteStageCommand(this);
+            EditCommand = new NavigateEditStageCommand(this);
+            AddCommand = new NavigateAddStageCommand();
+
+            RefreshCommand.Execute(null);
         }
     }
 }

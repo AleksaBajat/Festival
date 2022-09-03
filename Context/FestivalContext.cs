@@ -7,8 +7,9 @@ namespace Context
     {
         public FestivalContext()
         {
-           // Database.SetInitializer(new FestivalContextInitializer());
+           Database.SetInitializer(new FestivalContextInitializer());
         }
+
 
         public DbSet<User> Users { get; set; }
         public DbSet<Stage> Stages { get; set; }

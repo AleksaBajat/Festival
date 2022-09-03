@@ -4,13 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client.ViewModels;
+using DTO;
 
 namespace Client.Services.Abstractions
 {
-    public interface IEntityInterface<T>
+    internal interface ITimeStampService:IEntityInterface<TimeSlotDto>
     {
-        Task Add(T entity);
-
-        Task Delete(T entity);
+        Task GetAll(ObservableCollection<TimeSlotViewModel> collection);
     }
 }

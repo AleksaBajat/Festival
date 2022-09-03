@@ -1,4 +1,5 @@
-﻿using Client.Models;
+﻿using System;
+using Client.Models;
 
 namespace Client.ViewModels
 {
@@ -8,6 +9,8 @@ namespace Client.ViewModels
 
         public int StageId => _stage.StageId;
         public string Name => _stage.Name;
+
+        public DateTime Version => _stage.Version;
 
         public StageViewModel(Stage stage)
         {

@@ -18,6 +18,9 @@
             <DataTemplate DataType="{x:Type vms:StageListingViewModel}">
                 <views:FestivalView></views:FestivalView>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AddUpdateStageViewModel}">
+                <views:AddUpdateStageView></views:AddUpdateStageView>
+            </DataTemplate>
         </Grid.Resources>
         
         <ContentControl Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"></ContentControl>

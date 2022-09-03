@@ -141,7 +141,7 @@ namespace Server
         {
             using (FestivalContext context = new FestivalContext())
             {
-                List<Stage> stages = context.Stages.ToList();
+                List<Stage> stages = context.Stages.Where(s => s.IsDeleted == false).ToList();
 
                 List<StageDto> result = new List<StageDto>();
 
