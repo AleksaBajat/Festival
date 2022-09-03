@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Client.Services.Abstractions;
 using Client.Services.Concretes;
 using Client.State.Authentication;
+using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -10,15 +11,15 @@ namespace Client.Commands
     {
         private readonly AdminViewModel _adminViewModel;
         private readonly IRegisterService _registerService;
-        public RegisterCommand(AdminViewModel adminViewModel,IRegisterService registerService = null)
+        public RegisterCommand(AdminViewModel adminViewModel)
         {
             _adminViewModel = adminViewModel;
-            _registerService = registerService;
+            _registerService = DependencyResolver.Resolve<IRegisterService>();
         }
         
-        public async override Task ExecuteAsync(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
-            _registerService.Register(_adminViewModel.Username, _adminViewModel.Password, _adminViewModel.FirstName,
+            await _registerService.Register(_adminViewModel.Username, _adminViewModel.Password, _adminViewModel.FirstName,
                 _adminViewModel.LastName, _adminViewModel.IsAdmin);
         }
     }

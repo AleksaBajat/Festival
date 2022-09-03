@@ -11,7 +11,7 @@ namespace Client.Services.Concretes
 {
     public class RegisterService:IRegisterService
     {
-        private readonly string _endpointAddress = ConfigurationManager.AppSettings["authenticationServerAddress"];
+        private readonly string _endpointAddress = ConfigurationManager.AppSettings["registrationServerAddress"];
         public RegisterService()
         {
         }

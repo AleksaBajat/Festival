@@ -12,31 +12,34 @@ namespace Client.State.Authentication
     public class Authenticator:IAuthenticator
     {
         private readonly IAuthenticateService _authenticateService;
-        private NavigationStore _navigationStore;
+        private readonly INavigationService _navigationService;
         public AccountDto Account { get; private set; }
         public bool IsLoggedIn => Account != null;
 
-        public Authenticator(IAuthenticateService authenticateService)
+        public bool IsAdmin => Account.Role == CommonEnumerations.UserRole.Admin;
+
+        public Authenticator(IAuthenticateService authenticateService,INavigationService navigationService)
         {
             _authenticateService = authenticateService;
+            _navigationService = navigationService;
         }
         
         public async Task Login(string username, string password)
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
             var account = _authenticateService.Login(username, password);
 
-            if (account != null)
+            Account = await account;
+
+            if (account.Result != null)
             {
-                Account = await account;
-                
                 if (Account.Role == CommonEnumerations.UserRole.User)
                 {
                     MessageBox.Show("User Logged In.");
+                    _navigationService.NavigateToFestival();
                 }else if (Account.Role == CommonEnumerations.UserRole.Admin)
                 {
-                    MessageBox.Show("Admin Logged In.");    
-                    _navigationStore.CurrentViewModel = new AdminViewModel();
+                    MessageBox.Show("Admin Logged In.");
+                    _navigationService.NavigateToAdmin();
                 }
             } else
             {
@@ -47,8 +50,7 @@ namespace Client.State.Authentication
         public Task Logout()
         {
             Account = null;
-            _navigationStore.CurrentViewModel = new LoginViewModel();
-            
+            _navigationService.NavigateToLogin();
             return Task.CompletedTask;
         }
     }

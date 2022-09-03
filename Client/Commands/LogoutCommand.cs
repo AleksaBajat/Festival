@@ -8,7 +8,7 @@ namespace Client.Commands
     {
         private readonly IAuthenticator _authenticator;
 
-        public LogoutCommand(IAuthenticator authenticator)
+        public LogoutCommand()
         {
             _authenticator = DependencyResolver.Resolve<IAuthenticator>();
         }

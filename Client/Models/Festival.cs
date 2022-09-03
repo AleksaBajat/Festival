@@ -12,5 +12,11 @@ namespace Client.Models
             Name = name;
             Stages = new List<Stage>();
         }
+
+        public IEnumerable<Stage> GetStages()
+        {
+            return Stages;
+        }
+
     }
 }

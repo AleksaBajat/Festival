@@ -22,7 +22,8 @@ namespace Client.Stores
         
         public NavigationStore()
         {
-            _currentViewModel = new LoginViewModel();
+            _viewModelFactory = new LoginViewModelFactory();
+            _currentViewModel = _viewModelFactory.CreateViewModel();
         }
         
         public event Action CurrentViewModelChanged;

@@ -32,6 +32,7 @@ namespace Client
 
             _container.Register(Component.For<NavigationStore>().LifestyleSingleton());
             _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>());
+            _container.Register(Component.For<INavigationService>().ImplementedBy<NavigationService>());
             _container.Register(Component.For<IRegisterService>().ImplementedBy<RegisterService>());
             _container.Register(Component.For<IAuthenticator>().ImplementedBy<Authenticator>().LifestyleSingleton());
             

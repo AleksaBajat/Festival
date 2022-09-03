@@ -19,8 +19,20 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" FontSize="24">Add Users</TextBlock>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="24">Add Users</TextBlock>
+            <Button Grid.Column="1" Margin="0 0 20 0" Command="{Binding NavigateFestivalCommand}">Festival</Button>
+            <Button Grid.Column="2" Command="{Binding LogoutCommand}">Sign Out</Button>
+        </Grid>
+
+       
         
         <Grid Grid.Row="1" Margin="0 25 0 0">
             <Grid.RowDefinitions>
@@ -49,7 +61,7 @@
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0">Name</TextBlock>
-            <TextBox Grid.Row="1" Margin="0 5 0 0 " Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Margin="0 5 0 0 " Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </Grid>
         
         <Grid Grid.Row="4" Margin="0 10 0 0">
@@ -59,7 +71,7 @@
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0">Last Name</TextBlock>
-            <TextBox Grid.Row="1" Margin="0 5 0 0 " Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Margin="0 5 0 0 " Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </Grid>
         
         <Grid Grid.Row="5" Margin="0 10 0 0">
@@ -78,6 +90,12 @@
             </Grid.RowDefinitions>
             
             <Button Margin="0 10 0 0" Content="Add User" Command="{Binding RegisterCommand}"></Button>
+        </Grid>
+
+        <Grid Grid.Row="8" Margin="0 25 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
         </Grid>
     </Grid>
 </UserControl>

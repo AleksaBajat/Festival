@@ -8,6 +8,8 @@ namespace Client.State.Authentication
         AccountDto Account { get; }
         bool IsLoggedIn { get; }
 
+        bool IsAdmin { get; }
+
         Task Login(string username, string password);
         Task Logout();
     }
