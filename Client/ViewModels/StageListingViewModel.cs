@@ -4,8 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Client.Commands;
 using Client.Models;
 using Client.State.Authentication;
+using GalaSoft.MvvmLight.Command;
 
 namespace Client.ViewModels
 {
@@ -14,7 +17,7 @@ namespace Client.ViewModels
         private readonly ObservableCollection<StageViewModel> _stages;
 
         private readonly IAuthenticator _authenticator;
-     
+
         private bool _isAdmin;
 
         public IEnumerable<StageViewModel> Stages => _stages;
@@ -33,19 +36,18 @@ namespace Client.ViewModels
             }
         }
 
+        public ICommand NavigateAdminCommand { get; set; }
+
+        public ICommand LogoutCommand { get; set; }
+
+        public ICommand Refresh { get; set; }
+
         public StageListingViewModel(IAuthenticator authenticator)
         {
             _authenticator = authenticator;
             _stages = new ObservableCollection<StageViewModel>();
-
-            _stages.Add(new StageViewModel(new Stage
-            {
-                Name = "Main",
-                StageId = 1,
-                TimeSlots = new List<TimeSlot>()
-            }));
+            LogoutCommand = new LogoutCommand();
+            Refresh = new RefreshStagesCommand(_stages);
         }
-
-
     }
 }

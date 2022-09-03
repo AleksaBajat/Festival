@@ -7,10 +7,13 @@ namespace Context
     {
         public FestivalContext()
         {
-            
+           // Database.SetInitializer(new FestivalContextInitializer());
         }
 
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Stage> Stages { get; set; }
+        public DbSet<TimeSlot> TimeSlots { get; set; }
+        public DbSet<Artist> Artists { get; set; }
 
     }
 }

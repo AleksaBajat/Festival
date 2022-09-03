@@ -4,11 +4,11 @@ using static Common.Enums.CommonEnumerations;
 
 namespace Context.Models
 {
-    public class Account
+    public class User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int UserId { get; set; }
         
         public string Username { get; set; }
         
@@ -18,6 +18,6 @@ namespace Context.Models
         
         public string LastName { get; set; }
         public UserRole Role { get; set; }
-        public Account() {}
+        public User() {}
     }
 }

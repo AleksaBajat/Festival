@@ -15,9 +15,24 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <!--<TextBlock Visibility="{Binding IsAdmin,Converter={StaticResource BoolToVis}}" Text="Festival"></TextBlock>-->
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="1" Command="{Binding Refresh}">Refresh</Button>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -29,7 +44,7 @@
             <Button Grid.Column="2" Command="{Binding LogoutCommand}">Sign Out</Button>
         </Grid>
 
-        <ListView Grid.Row="1" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
+        <ListView Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

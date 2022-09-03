@@ -18,7 +18,7 @@ namespace Server
         
         public Task<bool> Register(string username, string password, string name, string lastName, bool isAdmin)
         {
-            _festivalContext.Accounts.Add(new Account
+            _festivalContext.Users.Add(new User
             {
                 Username = username,
                 Password = password,

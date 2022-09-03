@@ -31,11 +31,13 @@ namespace Client
             _container = new WindsorContainer();
 
             _container.Register(Component.For<NavigationStore>().LifestyleSingleton());
-            _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>());
-            _container.Register(Component.For<INavigationService>().ImplementedBy<NavigationService>());
-            _container.Register(Component.For<IRegisterService>().ImplementedBy<RegisterService>());
+            _container.Register(Component.For<StageService>().LifestyleSingleton());
+            _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>().LifestyleSingleton());
+            _container.Register(Component.For<INavigationService>().ImplementedBy<NavigationService>().LifestyleSingleton());
+            _container.Register(Component.For<IRegisterService>().ImplementedBy<RegisterService>().LifestyleSingleton());
             _container.Register(Component.For<IAuthenticator>().ImplementedBy<Authenticator>().LifestyleSingleton());
-            
+
+
 
             DependencyResolver.Container = _container;
 

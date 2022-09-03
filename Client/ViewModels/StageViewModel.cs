@@ -2,7 +2,7 @@
 
 namespace Client.ViewModels
 {
-    internal class StageViewModel:BaseViewModel
+    public class StageViewModel:BaseViewModel
     {
         private readonly Stage _stage;
 

@@ -20,7 +20,7 @@ namespace Server
         public Task<AccountDto> Login(string username, string password)
         {
             var account =
-                _festivalContext.Accounts.FirstOrDefault(acc => acc.Username == username && acc.Password == password);
+                _festivalContext.Users.FirstOrDefault(acc => acc.Username == username && acc.Password == password);
 
             AccountDto result = null;
 
