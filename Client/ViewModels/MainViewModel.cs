@@ -6,7 +6,6 @@ namespace Client.ViewModels
     public class MainViewModel:BaseViewModel
     {
         private readonly NavigationStore _navigationStore;
-        private readonly Authenticator _authenticator;
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
         public MainViewModel(NavigationStore navigationStore)

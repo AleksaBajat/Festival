@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
+using Common.Faults;
 using Context;
 using Context.Models;
 using Contracts;
@@ -14,7 +16,7 @@ namespace Server
     {
         private readonly object _lock = new object();
 
-        public Task Add(StageDto entity)
+        public Task<int> Add(StageDto entity, bool confirmed = false)
         {
             using (FestivalContext context = new FestivalContext())
             {
@@ -24,11 +26,11 @@ namespace Server
 
                 context.SaveChanges();
 
-                return Task.CompletedTask;
+                return Task.FromResult(stage.StageId);
             }
         }
 
-        public Task Duplicate(StageDto entity)
+        public Task<int> Duplicate(StageDto entity, bool confirmed = false)
         {
             lock (_lock)
             {
@@ -36,22 +38,25 @@ namespace Server
                 {
                     var stage = context.Stages.FirstOrDefault(s => s.StageId == entity.StageId);
 
-                    if (stage == null)
+                    if (!confirmed)
                     {
-                        return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                        if (stage == null)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Not existing instance."));
+                        }
+
+                        if (stage.IsDeleted == true)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Duplicate on deleted stage conflict."));
+                        }
+
+                        if (DateTime.Compare(entity.Version, stage.Version) < 0)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Duplicate on modified stage conflict."));
+                        }
                     }
 
-                    if (stage.IsDeleted == true)
-                    {
-                        return Task.FromException(
-                            new DeletedRowInaccessibleException($"Stage with id:{entity.StageId} was deleted from database."));
-                    }
-
-                    if (DateTime.Compare(entity.Version, stage.Version) < 0)
-                    {
-                        return Task.FromException(
-                            new DeletedRowInaccessibleException($"Stage with id:{entity.StageId} was modified between retrieval and your command."));
-                    }
+                    stage.IsDeleted = false;
 
                     var duplicateStage = new Stage
                     {
@@ -64,12 +69,12 @@ namespace Server
 
                     context.SaveChanges();
 
-                    return Task.CompletedTask;
+                    return Task.FromResult(duplicateStage.StageId);
                 }
             }
         }
 
-        public Task Delete(StageDto entity)
+        public Task Delete(StageDto entity, bool confirmed = false)
         {
             lock (_lock)
             {
@@ -77,22 +82,24 @@ namespace Server
                 {
                     var stage = context.Stages.FirstOrDefault(s => s.StageId == entity.StageId);
 
-                    if (stage == null)
+                    if (!confirmed)
                     {
-                        return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
-                    }
+                        if (stage == null)
+                        {
+                            return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                        }
 
-                    if (DateTime.Compare(entity.Version, stage.Version) < 0 && stage.IsDeleted == false)
-                    {
-                        return Task.FromException(
-                            new DeletedRowInaccessibleException($"Stage with id:{entity.StageId} was modified between retrieval and your command."));
-                    }
+                        if (DateTime.Compare(entity.Version, stage.Version) < 0 && stage.IsDeleted == false)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Delete on modified stage conflict."));
+                        }
 
-                    if (stage.IsDeleted == true)
-                    {
-                        return Task.CompletedTask;
+                        if (stage.IsDeleted == true)
+                        {
+                            return Task.CompletedTask;
+                        }
                     }
-
+                    
                     stage.IsDeleted = true;
 
                     context.SaveChanges();
@@ -102,7 +109,7 @@ namespace Server
             }
         }
 
-        public Task Update(StageDto entity)
+        public Task Update(StageDto entity, bool confirmed = false)
         {
             lock (_lock)
             {
@@ -110,23 +117,26 @@ namespace Server
                 {
                     var stage = context.Stages.FirstOrDefault(s => s.StageId == entity.StageId);
 
-                    if (stage == null)
+
+                    if (!confirmed)
                     {
-                        return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                        if (stage == null)
+                        {
+                            return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                        }
+
+                        if (stage.IsDeleted == true)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Update on deleted stage conflict."));
+                        }
+
+                        if (DateTime.Compare(entity.Version, stage.Version) < 0)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Update on modified stage conflict."));
+                        }
                     }
 
-                    if (stage.IsDeleted == true)
-                    {
-                        return Task.FromException(
-                            new DeletedRowInaccessibleException($"Stage with id:{entity.StageId} was deleted from database."));
-                    }
-
-                    if (DateTime.Compare(entity.Version, stage.Version) < 0)
-                    {
-                        return Task.FromException(
-                            new DeletedRowInaccessibleException($"Stage with id:{entity.StageId} was modified between retrieval and your command."));
-                    }
-
+                    stage.IsDeleted = false;
                     stage.Name = entity.Name;
                     stage.Version = DateTime.Now;
 

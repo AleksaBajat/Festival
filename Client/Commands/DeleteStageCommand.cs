@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Client.Services.Abstractions;
+using Client.State.History;
 using Client.State.Resolver;
 using Client.ViewModels;
 
@@ -23,8 +24,15 @@ namespace Client.Commands
         }
         public override async Task ExecuteAsync(object parameter)
         {
-            await _stageService.Delete(_viewModel.Selected);
-            _navigationService.NavigateToFestival();
+            try
+            {
+                await _stageService.Delete(_viewModel.Selected);
+            }
+            finally
+            {
+                History.AddToUndo(this);
+                _navigationService.NavigateToFestival();
+            }
         }
 
         public override bool CanExecute(object parameter)
@@ -32,7 +40,7 @@ namespace Client.Commands
             return _viewModel.Selected != null && base.CanExecute(parameter);
         }
 
-        public override Task Undo(object parameter)
+        public override async Task Undo(object parameter)
         {
             throw new NotImplementedException();
         }

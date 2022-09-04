@@ -81,7 +81,7 @@
             </Grid.ColumnDefinitions>
             
             <RadioButton Grid.Column="0" IsChecked="{Binding IsAdmin}" GroupName="UserType">Admin</RadioButton>
-            <RadioButton Grid.Column="1" IsChecked="{Binding IsUser}" GroupName="UserType">User</RadioButton>
+            <RadioButton Grid.Column="1" GroupName="UserType">User</RadioButton>
         </Grid>
         
         <Grid Grid.Row="6" Margin="0 25 0 0">

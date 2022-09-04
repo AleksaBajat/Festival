@@ -124,10 +124,12 @@
     <Compile Include="Commands\NavigateAdminCommand.cs" />
     <Compile Include="Commands\NavigateEditStageCommand.cs" />
     <Compile Include="Commands\NavigateFestivalCommand.cs" />
+    <Compile Include="Commands\RedoPreviousCommand.cs" />
     <Compile Include="Commands\RefreshStagesCommand.cs" />
     <Compile Include="Commands\RegisterCommand.cs" />
     <Compile Include="Commands\TimeSlotsCommand.cs" />
     <Compile Include="Commands\UndoBaseCommand.cs" />
+    <Compile Include="Commands\UndoPreviousCommand.cs" />
     <Compile Include="Commands\UpdateStageCommand.cs" />
     <Compile Include="Components\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
@@ -148,6 +150,8 @@
     <Compile Include="Services\Concretes\StageService.cs" />
     <Compile Include="State\Authentication\Authenticator.cs" />
     <Compile Include="State\Authentication\IAuthenticator.cs" />
+    <Compile Include="State\History\History.cs" />
+    <Compile Include="State\History\IHistory.cs" />
     <Compile Include="State\Resolver\DependencyResolver.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AddUpdateStageViewModel.cs" />
@@ -172,6 +176,9 @@
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TimeSlotsView.xaml.cs">
+      <DependentUpon>TimeSlotsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Components\BindablePasswordBox.xaml" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +199,10 @@
     <Page Include="Views\AdminView.xaml" />
     <Page Include="Views\FestivalView.xaml" />
     <Page Include="Views\LoginView.xaml" />
+    <Page Include="Views\TimeSlotsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Artist.cs" />
@@ -228,6 +239,9 @@
       <Project>{248aebdf-e973-41cd-8da9-91c59200cd4a}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

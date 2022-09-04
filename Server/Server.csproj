@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtistHandler.cs" />
+    <Compile Include="ArtistServer.cs" />
     <Compile Include="AuthenticationServer.cs" />
     <Compile Include="LoginHandler.cs" />
     <Compile Include="Program.cs" />
@@ -63,6 +65,8 @@
     <Compile Include="RegistrationServer.cs" />
     <Compile Include="StageHandler.cs" />
     <Compile Include="StageServer.cs" />
+    <Compile Include="TimeSlotHandler.cs" />
+    <Compile Include="TimeSlotServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

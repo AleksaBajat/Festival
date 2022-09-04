@@ -39,12 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IArtistHandler.cs" />
     <Compile Include="ILoginHandler.cs" />
     <Compile Include="IRegisterHandler.cs" />
     <Compile Include="IStageHandler.cs" />
+    <Compile Include="ITimeSlotHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{20386B19-CD0E-4E31-BE36-4A82A3F5CA11}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Context\Context.csproj">
       <Project>{7A4DE107-10A9-4048-BA02-55441A69A859}</Project>
       <Name>Context</Name>

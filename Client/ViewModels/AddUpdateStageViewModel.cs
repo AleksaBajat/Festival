@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Models;
 using Client.State.Authentication;
 
 namespace Client.ViewModels
@@ -17,6 +18,8 @@ namespace Client.ViewModels
         private readonly string _type;
 
         public string WindowType => _type;
+
+        public bool IsEdit => WindowType == "Edit Festival";
 
         private string _name;
 
@@ -47,15 +50,16 @@ namespace Client.ViewModels
         public AddUpdateStageViewModel(StageViewModel viewModel,string type)
         {
             _viewModel = viewModel;
+            _name = _viewModel.Name;
 
             if (type == "add")
             {
                 _type = "Add Festival";
-                AddOrUpdateCommand = new AddStageCommand();
-            }else if (type == "edit")
+                AddOrUpdateCommand = new AddStageCommand(this);
+            }else
             {
                 _type = "Edit Festival";
-                AddOrUpdateCommand = new UpdateStageCommand();
+                AddOrUpdateCommand = new UpdateStageCommand(this);
             }
 
             LogoutCommand = new LogoutCommand();

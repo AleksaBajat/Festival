@@ -71,6 +71,10 @@ namespace Client.ViewModels
 
         public ICommand AddCommand { get; set; }
 
+        public ICommand UndoCommand { get; set; }
+
+        public ICommand RedoCommand { get; set; }
+
         public StageListingViewModel(IAuthenticator authenticator)
         {
             _authenticator = authenticator;
@@ -84,6 +88,8 @@ namespace Client.ViewModels
             DeleteCommand = new DeleteStageCommand(this);
             EditCommand = new NavigateEditStageCommand(this);
             AddCommand = new NavigateAddStageCommand();
+            UndoCommand = new UndoPreviousCommand();
+            RedoCommand = new RedoPreviousCommand();
 
             RefreshCommand.Execute(null);
         }

@@ -10,11 +10,12 @@ namespace Client.Models
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }
-        public List<Artist> Artists { get; set; }
+
+        public DateTime Version { get; set; }
 
         public TimeSlot()
         {
-            Artists = new List<Artist>();
+
         }
     }
 }
