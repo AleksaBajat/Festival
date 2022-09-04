@@ -91,6 +91,8 @@ namespace Client.ViewModels
             UndoCommand = new UndoPreviousCommand();
             RedoCommand = new RedoPreviousCommand();
 
+            ((AsyncBaseCommand)UndoCommand).OnCanExecuteChanged();
+            ((AsyncBaseCommand)RedoCommand).OnCanExecuteChanged();
             RefreshCommand.Execute(null);
         }
     }

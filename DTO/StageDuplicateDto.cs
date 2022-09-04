@@ -8,16 +8,9 @@ using System.Threading.Tasks;
 namespace DTO
 {
     [DataContract]
-    public class StageDto
+    public class StageDuplicateDto:StageDto
     {
         [DataMember]
-        public Guid StageId { get; set; }
-
-        [DataMember]
-        public string Name { get; set; }
-
-        [DataMember]
-
-        public DateTime Version { get; set; }
+        public Guid NewId { get; set; }
     }
 }

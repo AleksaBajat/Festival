@@ -39,7 +39,7 @@ namespace Client.Services.Concretes
             _navigationStore.CurrentViewModel = new LoginViewModel();
         }
 
-        public void NavigateToTimeStamps(int id)
+        public void NavigateToTimeStamps(Guid id)
         {
             _navigationStore = DependencyResolver.Resolve<NavigationStore>();
             _navigationStore.CurrentViewModel = new TimeSlotListingViewModel(id);

@@ -11,7 +11,7 @@ namespace Client.Services.Abstractions
 {
     internal interface IStageService:IEntityInterface<StageViewModel>
     {
-        Task Duplicate(StageViewModel stage);
+        Task Duplicate(StageViewModel stage,Guid newId);
 
         Task Update(StageViewModel entity);
 

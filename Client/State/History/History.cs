@@ -29,7 +29,7 @@ namespace Client.State.History
 
                 ReadyToUndo.Remove(command);
 
-                command.Execute(0);
+                command.Undo(0);
 
                 ReadyToRedo.Add(command);
             }

@@ -37,7 +37,7 @@ namespace Client.ViewModels
             }
         }
 
-        public int StageId => _viewModel.StageId;
+        public Guid StageId => _viewModel.StageId;
 
         public DateTime Version => _viewModel.Version;
 

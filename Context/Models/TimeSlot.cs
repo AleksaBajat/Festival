@@ -8,9 +8,9 @@ namespace Context.Models {
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int TimeSlotId { get; set; }
+		public Guid TimeSlotId { get; set; }
 
-        public int StageId { get; set; }
+        public Guid StageId { get; set; }
 
         public string Description { get; set; }
 

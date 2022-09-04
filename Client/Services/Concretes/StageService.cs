@@ -29,24 +29,30 @@ namespace Client.Services.Concretes
             await proxy.Add(model);
         }
 
-        public async Task Duplicate(StageViewModel stage)
+        public async Task Duplicate(StageViewModel stage, Guid newId)
         {
             ChannelFactory<IStageHandler> factory = new ChannelFactory<IStageHandler>(new NetTcpBinding(), _endpointAddress);
 
             var proxy = factory.CreateChannel();
 
-            var model = ConvertVmToDto(stage);
+            StageDuplicateDto duplicate = new StageDuplicateDto
+            {
+                StageId = stage.StageId,
+                NewId = newId,
+                Name = stage.Name,
+                Version = stage.Version
+            };
 
             try
             {
-                await proxy.Duplicate(model);
+                await proxy.Duplicate(duplicate);
             }
             catch (FaultException<ConflictFault>)
             {
                 if (MessageBox.Show("The record you attempted to duplicate was modified by another user after you got the original values. The duplication operation was canceled. If you still want to duplicate this record, click 'Yes' button. Otherwise click 'No'.",
                         "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                   await proxy.Duplicate(model, true);
+                   await proxy.Duplicate(duplicate, true);
                 }
             }
         }

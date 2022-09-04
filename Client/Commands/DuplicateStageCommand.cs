@@ -16,13 +16,13 @@ namespace Client.Commands
         private readonly INavigationService _navigationService;
         private readonly IStageService _stageService;
         private readonly StageListingViewModel _viewModel;
-        private int _stageId;
 
         public DuplicateStageCommand(StageListingViewModel viewModel)
         {
             _navigationService = DependencyResolver.Resolve<INavigationService>();
             _stageService = DependencyResolver.Resolve<IStageService>();
             _viewModel = viewModel;
+            StageId = Guid.NewGuid();
         }
 
 
@@ -31,8 +31,18 @@ namespace Client.Commands
 
             try
             {
-                await _stageService.Duplicate(_viewModel.Selected);
-                _stageId = (int)parameter;
+                await _stageService.Duplicate(_viewModel.Selected,StageId);
+                if (parameter != null)
+                {
+                    if ((int)parameter != 0)
+                    {
+                        History.AddToUndo(this);
+                    }
+                }
+                else
+                {
+                    History.AddToUndo(this);
+                }
             }
             finally
             {

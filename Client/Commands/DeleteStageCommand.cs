@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.History;
 using Client.State.Resolver;
@@ -26,11 +27,22 @@ namespace Client.Commands
         {
             try
             {
+                StageId = _viewModel.Selected.StageId;
                 await _stageService.Delete(_viewModel.Selected);
+                if (parameter != null)
+                {
+                    if ((int)parameter != 0)
+                    {
+                        History.AddToUndo(this);
+                    }
+                }
+                else
+                {
+                    History.AddToUndo(this);
+                }
             }
             finally
             {
-                History.AddToUndo(this);
                 _navigationService.NavigateToFestival();
             }
         }

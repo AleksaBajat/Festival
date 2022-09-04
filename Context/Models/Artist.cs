@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Context.Models {
-	public class Artist {
+	public class Artist
+    {
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int ArtistId { get; set; }
+        [Key] 
+        public Guid ArtistId { get; set; }
 
-		public int TimeSlotId { get; set; }
+		public Guid TimeSlotId { get; set; }
 
         public string Genre { get; set; }
 

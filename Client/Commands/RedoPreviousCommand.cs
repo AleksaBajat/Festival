@@ -15,5 +15,10 @@ namespace Client.Commands
 
             return Task.CompletedTask;
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return History.ReadyToRedo.Count != 0 && base.CanExecute(parameter);
+        }
     }
 }

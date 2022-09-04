@@ -7,7 +7,7 @@ namespace Client.ViewModels
     {
         private readonly Stage _stage;
 
-        public int StageId => _stage.StageId;
+        public Guid StageId => _stage.StageId;
         public string Name => _stage.Name;
 
         public DateTime Version => _stage.Version;

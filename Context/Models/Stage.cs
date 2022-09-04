@@ -8,8 +8,8 @@ namespace Context.Models
     public class Stage
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StageId { get; set; }
+        public Guid StageId { get; set; }
+
         public string Name { get; set; }
 
         public DateTime Version { get; set; }

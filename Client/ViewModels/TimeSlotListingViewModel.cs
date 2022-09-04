@@ -14,7 +14,7 @@ namespace Client.ViewModels
 
         public ICommand RefreshCommand { get; set; }
 
-        public TimeSlotListingViewModel(int id)
+        public TimeSlotListingViewModel(Guid id)
         {
 
         }

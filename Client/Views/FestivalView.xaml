@@ -40,8 +40,8 @@
             <Button Margin="10 0 0 10" Grid.Row="3" Command="{Binding DuplicateCommand}">Duplicate</Button>
             <Button Margin="10 0 0 10" Grid.Row="4" Command="{Binding EditCommand}">Edit</Button>
             <Button Margin="10 0 0 10" Grid.Row="5" Command="{Binding DeleteCommand}">Delete</Button>
-            <Button Margin="10 0 0 10" Grid.Row="6" Command="{Binding Undo}">Undo</Button>
-            <Button Margin="10 0 0 10" Grid.Row="7" Command="{Binding Redo}">Redo</Button>
+            <Button Margin="10 0 0 10" Grid.Row="6" Command="{Binding UndoCommand}">Undo</Button>
+            <Button Margin="10 0 0 10" Grid.Row="7" Command="{Binding RedoCommand}">Redo</Button>
         </Grid>
 
         <Grid Grid.Row="0" Grid.Column="0">
@@ -56,7 +56,7 @@
             <Button Grid.Column="2" Command="{Binding LogoutCommand}">Sign Out</Button>
         </Grid>
 
-        <ListView Name="StageList" SelectedItem="{Binding Selected}" Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
+        <ListView AlternationCount="{Binding Stages.Count}" Name="StageList" SelectedItem="{Binding Selected}" Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace Client.Commands
@@ -7,5 +8,7 @@ namespace Client.Commands
         public abstract override Task ExecuteAsync(object parameter);
 
         public abstract Task Undo(object parameter);
+
+        public Guid StageId { get; set; }
     }
 }

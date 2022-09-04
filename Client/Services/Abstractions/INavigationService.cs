@@ -15,7 +15,7 @@ namespace Client.Services.Abstractions
 
         void NavigateToLogin();
 
-        void NavigateToTimeStamps(int id);
+        void NavigateToTimeStamps(Guid id);
 
         void NavigateToEditStage(StageViewModel viewModel);
 

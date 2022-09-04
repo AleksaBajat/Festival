@@ -50,9 +50,9 @@
   <ItemGroup>
     <Compile Include="FestivalContext.cs" />
     <Compile Include="FestivalContextInitializer.cs" />
-    <Compile Include="Migrations\202209031740141_InitialMigration.cs" />
-    <Compile Include="Migrations\202209031740141_InitialMigration.designer.cs">
-      <DependentUpon>202209031740141_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202209041814348_Initial.cs" />
+    <Compile Include="Migrations\202209041814348_Initial.designer.cs">
+      <DependentUpon>202209041814348_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
@@ -72,8 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202209031740141_InitialMigration.resx">
-      <DependentUpon>202209031740141_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202209041814348_Initial.resx">
+      <DependentUpon>202209041814348_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

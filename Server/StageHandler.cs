@@ -16,21 +16,30 @@ namespace Server
     {
         private readonly object _lock = new object();
 
-        public Task<int> Add(StageDto entity, bool confirmed = false)
+        public Task Add(StageDto entity, bool confirmed = false)
         {
             using (FestivalContext context = new FestivalContext())
             {
                 Stage stage = ConvertToContextModel(entity);
 
-                context.Stages.Add(stage);
+                var existing = context.Stages.FirstOrDefault(s => s.StageId == entity.StageId);
+
+                if (existing == null)
+                {
+                    context.Stages.Add(stage);
+                }
+                else
+                {
+                    existing.IsDeleted = false;
+                }
 
                 context.SaveChanges();
 
-                return Task.FromResult(stage.StageId);
+                return Task.CompletedTask;
             }
         }
 
-        public Task<int> Duplicate(StageDto entity, bool confirmed = false)
+        public Task Duplicate(StageDuplicateDto entity, bool confirmed = false)
         {
             lock (_lock)
             {
@@ -60,6 +69,7 @@ namespace Server
 
                     var duplicateStage = new Stage
                     {
+                        StageId = entity.NewId,
                         Name = stage.Name,
                         Version = DateTime.Now,
                         TimeSlots = stage.TimeSlots.ToList()
@@ -168,6 +178,7 @@ namespace Server
         {
             Stage conversionResult = new Stage
             {
+                StageId = dto.StageId,
                 Name = dto.Name,
                 Version = dto.Version
             };

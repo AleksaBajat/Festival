@@ -43,6 +43,7 @@
     <Compile Include="ArtistDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageDto.cs" />
+    <Compile Include="StageDuplicateDto.cs" />
     <Compile Include="TimeSlotDto.cs" />
   </ItemGroup>
   <ItemGroup>

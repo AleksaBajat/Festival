@@ -28,11 +28,23 @@ namespace Client.Commands
         {
             try
             {
+                StageId = _addUpdateStageViewModel.StageId;
                 await _stageService.Update(new StageViewModel(new Stage
                 {
                     Name = _addUpdateStageViewModel.Name,
                     StageId = _addUpdateStageViewModel.StageId
                 }));
+                if (parameter != null)
+                {
+                    if ((int)parameter != 0)
+                    {
+                        History.AddToUndo(this);
+                    }
+                }
+                else
+                {
+                    History.AddToUndo(this);
+                }
             }
             finally
             {

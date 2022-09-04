@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -11,8 +11,8 @@
                 "dbo.Artists",
                 c => new
                     {
-                        ArtistId = c.Int(nullable: false, identity: true),
-                        TimeSlotId = c.Int(nullable: false),
+                        ArtistId = c.Guid(nullable: false),
+                        TimeSlotId = c.Guid(nullable: false),
                         Genre = c.String(),
                         Name = c.String(),
                         Surname = c.String(),
@@ -27,7 +27,7 @@
                 "dbo.Stages",
                 c => new
                     {
-                        StageId = c.Int(nullable: false, identity: true),
+                        StageId = c.Guid(nullable: false),
                         Name = c.String(),
                         Version = c.DateTime(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
@@ -38,8 +38,8 @@
                 "dbo.TimeSlots",
                 c => new
                     {
-                        TimeSlotId = c.Int(nullable: false, identity: true),
-                        StageId = c.Int(nullable: false),
+                        TimeSlotId = c.Guid(nullable: false, identity: true),
+                        StageId = c.Guid(nullable: false),
                         Description = c.String(),
                         From = c.DateTime(nullable: false),
                         To = c.DateTime(nullable: false),
@@ -54,7 +54,7 @@
                 "dbo.Users",
                 c => new
                     {
-                        UserId = c.Int(nullable: false, identity: true),
+                        UserId = c.Guid(nullable: false, identity: true),
                         Username = c.String(),
                         Password = c.String(),
                         Name = c.String(),
