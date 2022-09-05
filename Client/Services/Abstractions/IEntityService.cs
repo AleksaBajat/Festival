@@ -4,13 +4,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Client.ViewModels;
-using DTO;
 
 namespace Client.Services.Abstractions
 {
-    internal interface ITimeSlotService:IEntityService<TimeSlotViewModel>
+    public interface IEntityService<T>
     {
-        Task GetAll(ObservableCollection<TimeSlotViewModel> collection,Guid stageId);
+        Task Add(T entity);
+
+        Task Delete(T entity);
+
+        Task Update(T entity);
     }
 }

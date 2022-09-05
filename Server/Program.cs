@@ -10,17 +10,20 @@ namespace Server
             RegistrationServer registrationServer = new RegistrationServer();
             StageServer stageServer = new StageServer();
             TimeSlotServer timeSlotServer = new TimeSlotServer();
+            ArtistServer artistServer = new ArtistServer();
 
             authenticationServer.Open();
             registrationServer.Open();
             stageServer.Open();
             timeSlotServer.Open();
+            artistServer.Open();
             Console.WriteLine(@"Press any key to close.");
             Console.ReadKey();
             authenticationServer.Close();
             registrationServer.Close();
             stageServer.Close();
             timeSlotServer.Close();
+            artistServer.Close();
         }
     }
 }

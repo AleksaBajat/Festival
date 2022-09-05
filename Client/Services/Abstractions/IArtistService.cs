@@ -4,15 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client.ViewModels;
 
 namespace Client.Services.Abstractions
 {
-    public interface IEntityInterface<T>
+    internal interface IArtistService:IEntityService<ArtistViewModel>
     {
-        Task Add(T entity);
-
-        Task Delete(T entity);
-
-        Task Update(T entity);
+        Task GetAll(ObservableCollection<ArtistViewModel> collection, Guid timeSlotId);
     }
 }

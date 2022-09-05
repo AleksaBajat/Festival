@@ -12,7 +12,7 @@ namespace Server
     internal class ArtistServer
     {
         private readonly ServiceHost _host;
-        private readonly string _address = ConfigurationManager.AppSettings["stageServerAddress"];
+        private readonly string _address = ConfigurationManager.AppSettings["artistServerAddress"];
 
         public ArtistServer()
         {

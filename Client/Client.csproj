@@ -120,6 +120,7 @@
     <Compile Include="Commands\DeleteStageCommand.cs" />
     <Compile Include="Commands\DeleteTimeSlotCommand.cs" />
     <Compile Include="Commands\DuplicateStageCommand.cs" />
+    <Compile Include="Commands\RefreshArtistsCommand.cs" />
     <Compile Include="Commands\UpdateTimeSlotCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
@@ -145,12 +146,14 @@
     <Compile Include="Factories\LoginViewModelFactory.cs" />
     <Compile Include="Models\Festival.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Services\Abstractions\IArtistService.cs" />
     <Compile Include="Services\Abstractions\IAuthenticateService.cs" />
-    <Compile Include="Services\Abstractions\IEntityInterface.cs" />
+    <Compile Include="Services\Abstractions\IEntityService.cs" />
     <Compile Include="Services\Abstractions\INavigationService.cs" />
     <Compile Include="Services\Abstractions\IRegisterService.cs" />
     <Compile Include="Services\Abstractions\IStageService.cs" />
     <Compile Include="Services\Abstractions\ITimeSlotService.cs" />
+    <Compile Include="Services\Concretes\ArtistService.cs" />
     <Compile Include="Services\Concretes\AuthenticateService.cs" />
     <Compile Include="Services\Concretes\NavigationService.cs" />
     <Compile Include="Services\Concretes\RegisterService.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="ViewModels\AddUpdateTimeSlotViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\ArtistListingViewModel.cs" />
+    <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\StageListingViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
