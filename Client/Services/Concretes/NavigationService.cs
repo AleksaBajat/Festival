@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.Authentication;
-using Client.State.Resolver;
 using Client.Stores;
 using Client.ViewModels;
 
@@ -14,65 +9,73 @@ namespace Client.Services.Concretes
 {
     internal class NavigationService:INavigationService
     {
-        private NavigationStore _navigationStore;
+        private readonly NavigationStore _navigationStore;
+        private readonly IAuthenticator _authenticator;
+        private readonly IRegisterService _registerService;
+        private readonly IStageService _stageService;
+        private readonly ITimeSlotService _timeSlotService;
+        private readonly IArtistService _artistService;
 
-        public NavigationService()
+        public NavigationService(NavigationStore navigationStore,
+            IAuthenticator authenticator,
+            IRegisterService registerService,
+            IStageService stageService,
+            ITimeSlotService timeSlotService,IArtistService artistService)
         {
-            
+            _authenticator = authenticator;
+            _navigationStore = navigationStore;
+            _registerService = registerService;
+            _stageService = stageService;
+            _timeSlotService = timeSlotService;
+            _artistService = artistService;
+            NavigateToLogin();
         }
+
+        public NavigationStore NavigationStore => _navigationStore;
 
         public void NavigateToAdmin()
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new AdminViewModel();
+            _navigationStore.CurrentViewModel = new AdminViewModel(_registerService,_authenticator,this);
         }
 
         public void NavigateToFestival()
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new StageListingViewModel(DependencyResolver.Resolve<IAuthenticator>());
+            _navigationStore.CurrentViewModel = new StageListingViewModel(_authenticator,_stageService,this);
         }
 
         public void NavigateToLogin()
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new LoginViewModel();
+            _navigationStore.CurrentViewModel = new LoginViewModel(_authenticator,this);
         }
 
         public void NavigateToTimeStamps(Guid stageId)
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new TimeSlotListingViewModel(stageId);
+            _navigationStore.CurrentViewModel = new TimeSlotListingViewModel(_timeSlotService,this,_authenticator,stageId);
         }
 
         public void NavigateToArtists(Guid timeSlotId)
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new ArtistListingViewModel(timeSlotId);
+            _navigationStore.CurrentViewModel = new ArtistListingViewModel(_authenticator,this,_artistService,timeSlotId);
         }
 
         public void NavigateToAddTimeStamps(TimeSlotViewModel viewModel)
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(viewModel,"add");
+            _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(_authenticator,this,_timeSlotService,viewModel,"add");
         }
 
         public void NavigateToEditTimeStamps(TimeSlotViewModel viewModel)
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(viewModel,"edit");
+            _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(_authenticator,this,_timeSlotService,viewModel,"edit");
         }
 
         public void NavigateToEditStage(StageViewModel viewModel)
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new AddUpdateStageViewModel(viewModel, "edit");
+            _navigationStore.CurrentViewModel = new AddUpdateStageViewModel(_authenticator,this,_stageService,viewModel, "edit");
         }
 
         public void NavigateToAddStage()
         {
-            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new AddUpdateStageViewModel(new StageViewModel(new Stage()), "add");
+            _navigationStore.CurrentViewModel = new AddUpdateStageViewModel(_authenticator,this,_stageService,new StageViewModel(new Stage()), "add");
         }
     }
 }

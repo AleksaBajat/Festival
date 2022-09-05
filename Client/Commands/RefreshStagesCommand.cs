@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Client.Services.Abstractions;
-using Client.Services.Concretes;
-using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -16,10 +10,10 @@ namespace Client.Commands
         private ObservableCollection<StageViewModel> _collection;
         private IStageService _stageService;
 
-        public RefreshStagesCommand(ObservableCollection<StageViewModel> collection)
+        public RefreshStagesCommand(IStageService stageService,ObservableCollection<StageViewModel> collection)
         {
             _collection = collection;
-            _stageService = DependencyResolver.Resolve<IStageService>();
+            _stageService = stageService;
         }
 
         public override Task ExecuteAsync(object parameter)

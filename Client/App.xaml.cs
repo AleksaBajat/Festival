@@ -5,7 +5,6 @@ using Client.Models;
 using Client.Services.Abstractions;
 using Client.Services.Concretes;
 using Client.State.Authentication;
-using Client.State.Resolver;
 using Client.Stores;
 using Client.ViewModels;
 
@@ -31,7 +30,7 @@ namespace Client
             _container = new WindsorContainer();
 
             _container.Register(Component.For<NavigationStore>().LifestyleSingleton());
-            _container.Register(Component.For<IArtistService>().LifestyleSingleton());
+            _container.Register(Component.For<IArtistService>().ImplementedBy<ArtistService>().LifestyleSingleton());
             _container.Register(Component.For<ITimeSlotService>().ImplementedBy<TimeSlotService>().LifestyleSingleton());
             _container.Register(Component.For<IStageService>().ImplementedBy<StageService>().LifestyleSingleton());
             _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>().LifestyleSingleton());
@@ -40,16 +39,13 @@ namespace Client
             _container.Register(Component.For<IAuthenticator>().ImplementedBy<Authenticator>().LifestyleSingleton());
 
 
-
-            DependencyResolver.Container = _container;
-
             _container.ResolveAll<MainWindow>();
 
             var navigationStore = _container.Resolve<NavigationStore>();            
             
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(navigationStore)
+                DataContext = new MainViewModel(_container.Resolve<INavigationService>())
             };
 
             MainWindow.Show();

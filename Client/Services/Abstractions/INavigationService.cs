@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client.Stores;
 using Client.ViewModels;
 
 namespace Client.Services.Abstractions
 {
     public interface INavigationService
     {
+        public NavigationStore NavigationStore { get; }
+
         void NavigateToAdmin();
 
         void NavigateToFestival();

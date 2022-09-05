@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Client.Services.Abstractions;
-using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -15,10 +10,10 @@ namespace Client.Commands
         private readonly INavigationService _navigationService;
         private readonly TimeSlotListingViewModel _timeSlotListingViewModel;
 
-        public DeleteTimeSlotCommand(TimeSlotListingViewModel timeSlotListingViewModel)
+        public DeleteTimeSlotCommand(ITimeSlotService timeSlotService, INavigationService navigationService,TimeSlotListingViewModel timeSlotListingViewModel)
         {
-            _navigationService = DependencyResolver.Resolve<INavigationService>();
-            _timeSlotService = DependencyResolver.Resolve<ITimeSlotService>();
+            _navigationService = navigationService;
+            _timeSlotService = timeSlotService;
             _timeSlotListingViewModel = timeSlotListingViewModel;
         }
 

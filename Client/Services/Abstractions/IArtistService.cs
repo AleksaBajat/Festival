@@ -8,7 +8,7 @@ using Client.ViewModels;
 
 namespace Client.Services.Abstractions
 {
-    internal interface IArtistService:IEntityService<ArtistViewModel>
+    public interface IArtistService:IEntityService<ArtistViewModel>
     {
         Task GetAll(ObservableCollection<ArtistViewModel> collection, Guid timeSlotId);
     }

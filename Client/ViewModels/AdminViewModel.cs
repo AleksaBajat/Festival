@@ -1,5 +1,6 @@
 using System.Windows.Input;
 using Client.Commands;
+using Client.Services.Abstractions;
 using Client.State.Authentication;
 
 namespace Client.ViewModels
@@ -67,13 +68,11 @@ namespace Client.ViewModels
 
         public ICommand NavigateFestivalCommand { get; set; }
 
-        public AdminViewModel()
+        public AdminViewModel(IRegisterService registerService,IAuthenticator authenticator,INavigationService navigationService)
         {
-            RegisterCommand = new RegisterCommand(this);
-            LogoutCommand = new LogoutCommand();
-            NavigateFestivalCommand = new NavigateFestivalCommand();
+            RegisterCommand = new RegisterCommand(registerService,this);
+            LogoutCommand = new LogoutCommand(authenticator);
+            NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
         }
-
-
     }
 }

@@ -8,7 +8,6 @@ namespace Client.Stores
     public class NavigationStore
     {
         private BaseViewModel _currentViewModel;
-        private readonly IViewModelFactory _viewModelFactory;
 
         public BaseViewModel CurrentViewModel
         {
@@ -19,13 +18,7 @@ namespace Client.Stores
                 OnCurrentViewModelChanged();
             }
         }
-        
-        public NavigationStore()
-        {
-            _viewModelFactory = new LoginViewModelFactory();
-            _currentViewModel = _viewModelFactory.CreateViewModel();
-        }
-        
+
         public event Action CurrentViewModelChanged;
 
         private void OnCurrentViewModelChanged()

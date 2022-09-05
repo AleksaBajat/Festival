@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Services.Abstractions;
+using Client.State.Authentication;
 
 namespace Client.ViewModels
 {
@@ -47,18 +49,17 @@ namespace Client.ViewModels
             }
         }
 
-        public TimeSlotListingViewModel(Guid stageId)
+        public TimeSlotListingViewModel(ITimeSlotService timeSlotService,INavigationService navigationService,IAuthenticator authenticator,Guid stageId)
         {
             _timeSlots = new ObservableCollection<TimeSlotViewModel>();
 
-            RefreshCommand = new RefreshTimeSlotsCommand(_timeSlots, stageId);
-            NavigateFestivalCommand = new NavigateFestivalCommand();
-            LogoutCommand = new LogoutCommand();
-            ArtistsCommand = new NavigateArtistsCommand(this);
-            DeleteCommand = new DeleteTimeSlotCommand(this);
-            AddCommand = new NavigateAddTimeSlotCommand(stageId);
-            EditCommand = new NavigateEditTimeSlotCommand(this);
-
+            RefreshCommand = new RefreshTimeSlotsCommand(timeSlotService,_timeSlots, stageId);
+            NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
+            LogoutCommand = new LogoutCommand(authenticator);
+            ArtistsCommand = new NavigateArtistsCommand(navigationService,this);
+            DeleteCommand = new DeleteTimeSlotCommand(timeSlotService,navigationService,this);
+            AddCommand = new NavigateAddTimeSlotCommand(navigationService,stageId);
+            EditCommand = new NavigateEditTimeSlotCommand(navigationService, this);
             RefreshCommand.Execute(null);
         }
     }

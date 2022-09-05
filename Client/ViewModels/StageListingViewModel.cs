@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
 using Client.Models;
+using Client.Services.Abstractions;
 using Client.State.Authentication;
 using GalaSoft.MvvmLight.Command;
 
@@ -75,19 +76,19 @@ namespace Client.ViewModels
 
         public ICommand RedoCommand { get; set; }
 
-        public StageListingViewModel(IAuthenticator authenticator)
+        public StageListingViewModel(IAuthenticator authenticator,IStageService stageService,INavigationService navigationService)
         {
             _authenticator = authenticator;
             _stages = new ObservableCollection<StageViewModel>();
 
-            LogoutCommand = new LogoutCommand();
-            RefreshCommand = new RefreshStagesCommand(_stages);
-            NavigateAdminCommand = new NavigateAdminCommand();
-            TimeStampsCommand = new NavigateTimeSlotsCommand(this);
-            DuplicateCommand = new DuplicateStageCommand(this);
-            DeleteCommand = new DeleteStageCommand(this);
-            EditCommand = new NavigateEditStageCommand(this);
-            AddCommand = new NavigateAddStageCommand();
+            LogoutCommand = new LogoutCommand(authenticator);
+            RefreshCommand = new RefreshStagesCommand(stageService,_stages);
+            NavigateAdminCommand = new NavigateAdminCommand(navigationService);
+            TimeStampsCommand = new NavigateTimeSlotsCommand(navigationService,this);
+            DuplicateCommand = new DuplicateStageCommand(navigationService,stageService,this);
+            DeleteCommand = new DeleteStageCommand(navigationService,stageService,this);
+            EditCommand = new NavigateEditStageCommand(navigationService,this);
+            AddCommand = new NavigateAddStageCommand(navigationService);
             UndoCommand = new UndoPreviousCommand();
             RedoCommand = new RedoPreviousCommand();
 

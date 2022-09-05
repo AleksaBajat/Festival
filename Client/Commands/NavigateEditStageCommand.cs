@@ -1,5 +1,4 @@
 ﻿using Client.Services.Abstractions;
-using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -9,9 +8,9 @@ namespace Client.Commands
         private readonly INavigationService _navigationService;
         private readonly StageListingViewModel _stageListingViewModel;
 
-        public NavigateEditStageCommand(StageListingViewModel viewModel)
+        public NavigateEditStageCommand(INavigationService navigationService,StageListingViewModel viewModel)
         {
-            _navigationService = DependencyResolver.Resolve<INavigationService>();
+            _navigationService = navigationService;
             _stageListingViewModel = viewModel;
         }
 

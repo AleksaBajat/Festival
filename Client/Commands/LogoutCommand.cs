@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Client.State.Authentication;
-using Client.State.Resolver;
 
 namespace Client.Commands
 {
@@ -8,9 +7,9 @@ namespace Client.Commands
     {
         private readonly IAuthenticator _authenticator;
 
-        public LogoutCommand()
+        public LogoutCommand(IAuthenticator authenticator)
         {
-            _authenticator = DependencyResolver.Resolve<IAuthenticator>();
+            _authenticator = authenticator;
         }
         public override async Task ExecuteAsync(object parameter)
         {

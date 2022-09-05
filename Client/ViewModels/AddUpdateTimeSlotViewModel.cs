@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Services.Abstractions;
+using Client.State.Authentication;
 
 namespace Client.ViewModels
 {
@@ -65,25 +67,25 @@ namespace Client.ViewModels
 
         public ICommand NavigateFestivalCommand { get; set; }
 
-        public AddUpdateTimeSlotViewModel(TimeSlotViewModel viewModel, string type)
+        public AddUpdateTimeSlotViewModel(IAuthenticator authenticator,INavigationService navigationService,ITimeSlotService timeSlotService,TimeSlotViewModel viewModel, string type)
         {
             _viewModel = viewModel;
 
-            LogoutCommand = new LogoutCommand();
-            NavigateFestivalCommand = new NavigateFestivalCommand();
+            LogoutCommand = new LogoutCommand(authenticator);
+            NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
             _from = viewModel.From;
             _to = viewModel.To;
 
             if (type == "add")
             {
                 _type = "Add Time Slot";
-                AddOrUpdateCommand = new AddTimeSlotCommand(this);
+                AddOrUpdateCommand = new AddTimeSlotCommand(navigationService,timeSlotService,this);
             }
             else
             {
                 _type = "Edit Time Slot";
                 Description = viewModel.Description;
-                AddOrUpdateCommand = new UpdateTimeSlotCommand(this);
+                AddOrUpdateCommand = new UpdateTimeSlotCommand(navigationService,timeSlotService,this);
             }
 
         }

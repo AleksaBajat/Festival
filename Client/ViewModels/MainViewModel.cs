@@ -1,3 +1,4 @@
+using Client.Services.Abstractions;
 using Client.State.Authentication;
 using Client.Stores;
 
@@ -5,18 +6,21 @@ namespace Client.ViewModels
 {
     public class MainViewModel:BaseViewModel
     {
-        private readonly NavigationStore _navigationStore;
-        public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+        private readonly INavigationService _navigationService;
+        public BaseViewModel CurrentViewModel { get; set; }
 
-        public MainViewModel(NavigationStore navigationStore)
+        public MainViewModel(INavigationService navigationService)
         {
-            _navigationStore = navigationStore;
+            _navigationService = navigationService;
 
-            navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            CurrentViewModel = _navigationService.NavigationStore.CurrentViewModel;
+
+            _navigationService.NavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
         private void OnCurrentViewModelChanged()
         {
+            CurrentViewModel = _navigationService.NavigationStore.CurrentViewModel;
             OnPropertyChanged(nameof(CurrentViewModel));
         }
     }

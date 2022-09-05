@@ -163,7 +163,6 @@
     <Compile Include="State\Authentication\IAuthenticator.cs" />
     <Compile Include="State\History\History.cs" />
     <Compile Include="State\History\IHistory.cs" />
-    <Compile Include="State\Resolver\DependencyResolver.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AddUpdateArtistViewModel.cs" />
     <Compile Include="ViewModels\AddUpdateStageViewModel.cs" />

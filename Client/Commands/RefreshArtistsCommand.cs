@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Client.Services.Abstractions;
-using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -16,10 +12,10 @@ namespace Client.Commands
         private IArtistService _artistService;
         public Guid TimeSlotId { get; set; }
 
-        public RefreshArtistsCommand(ObservableCollection<ArtistViewModel> collection, Guid timeSlotId)
+        public RefreshArtistsCommand(IArtistService artistService,ObservableCollection<ArtistViewModel> collection, Guid timeSlotId)
         {
             _collection = collection;
-            _artistService = DependencyResolver.Resolve<IArtistService>();
+            _artistService = artistService;
             TimeSlotId = timeSlotId;
         }
 

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
+using Client.Services.Abstractions;
+using Client.State.Authentication;
 
 namespace Client.ViewModels
 {
@@ -24,15 +26,15 @@ namespace Client.ViewModels
         public ICommand AddCommand;
 
         public ICommand UpdateCommand;
-        public ArtistListingViewModel(Guid timeSlotId)
+        public ArtistListingViewModel(IAuthenticator authenticator,INavigationService navigationService,IArtistService artistService,Guid timeSlotId)
         {
             _artists = new ObservableCollection<ArtistViewModel>();
 
-            LogoutCommand = new LogoutCommand();
+            LogoutCommand = new LogoutCommand(authenticator);
 
-            NavigateFestivalCommand = new NavigateFestivalCommand();
+            NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
 
-            RefreshCommand = new RefreshArtistsCommand(_artists,timeSlotId);
+            RefreshCommand = new RefreshArtistsCommand(artistService,_artists,timeSlotId);
         }
     }
 }

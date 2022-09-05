@@ -9,7 +9,7 @@ using Client.ViewModels;
 
 namespace Client.Services.Abstractions
 {
-    internal interface IStageService:IEntityService<StageViewModel>
+    public interface IStageService:IEntityService<StageViewModel>
     {
         Task GetAll(ObservableCollection<StageViewModel> collection);
         Task Duplicate(StageViewModel stage,Guid newId);

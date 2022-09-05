@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Client.Services.Abstractions;
-using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -16,10 +12,10 @@ namespace Client.Commands
         private ITimeSlotService _timeSlotService;
         public Guid StageId { get; set; }
 
-        public RefreshTimeSlotsCommand(ObservableCollection<TimeSlotViewModel> collection, Guid stageId)
+        public RefreshTimeSlotsCommand(ITimeSlotService timeSlotService,ObservableCollection<TimeSlotViewModel> collection, Guid stageId)
         {
             _collection = collection;
-            _timeSlotService = DependencyResolver.Resolve<ITimeSlotService>();
+            _timeSlotService = timeSlotService;
             StageId = stageId;
         }
 

@@ -9,7 +9,7 @@ using DTO;
 
 namespace Client.Services.Abstractions
 {
-    internal interface ITimeSlotService:IEntityService<TimeSlotViewModel>
+    public interface ITimeSlotService:IEntityService<TimeSlotViewModel>
     {
         Task GetAll(ObservableCollection<TimeSlotViewModel> collection,Guid stageId);
     }

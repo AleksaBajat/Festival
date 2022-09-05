@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
 using Client.Models;
+using Client.Services.Abstractions;
 using Client.State.Authentication;
 
 namespace Client.ViewModels
@@ -49,7 +50,7 @@ namespace Client.ViewModels
 
         public ICommand NavigateFestivalCommand { get; set; }
 
-        public AddUpdateStageViewModel(StageViewModel viewModel,string type)
+        public AddUpdateStageViewModel(IAuthenticator authenticator, INavigationService navigationService,IStageService stageService, StageViewModel viewModel,string type)
         {
             _viewModel = viewModel;
             _name = _viewModel.Name;
@@ -57,15 +58,15 @@ namespace Client.ViewModels
             if (type == "add")
             {
                 _type = "Add Festival";
-                AddOrUpdateCommand = new AddStageCommand(this);
+                AddOrUpdateCommand = new AddStageCommand(navigationService,stageService,this);
             }else
             {
                 _type = "Edit Festival";
-                AddOrUpdateCommand = new UpdateStageCommand(this);
+                AddOrUpdateCommand = new UpdateStageCommand(navigationService,stageService,this);
             }
 
-            LogoutCommand = new LogoutCommand();
-            NavigateFestivalCommand = new NavigateFestivalCommand();
+            LogoutCommand = new LogoutCommand(authenticator);
+            NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
         }
     }
 }

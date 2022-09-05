@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Client.Services.Abstractions;
-using Client.State.Resolver;
-using Client.ViewModels;
+﻿using Client.Services.Abstractions;
 
 namespace Client.Commands
 {
@@ -13,9 +6,9 @@ namespace Client.Commands
     {
         private readonly INavigationService _navigationService;
 
-        public NavigateAddStageCommand()
+        public NavigateAddStageCommand(INavigationService navigationService)
         {
-            _navigationService = DependencyResolver.Resolve<INavigationService>();
+            _navigationService = navigationService;
         }
 
         public override void Execute(object parameter)

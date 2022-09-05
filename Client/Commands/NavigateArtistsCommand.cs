@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Client.Services.Abstractions;
-using Client.State.Resolver;
+﻿using Client.Services.Abstractions;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -13,9 +7,9 @@ namespace Client.Commands
     {
         private readonly INavigationService _navigationService;
         private readonly TimeSlotListingViewModel _timeSlotListingViewModel;
-        public NavigateArtistsCommand(TimeSlotListingViewModel timeSlotListingViewModel)
+        public NavigateArtistsCommand(INavigationService navigationService,TimeSlotListingViewModel timeSlotListingViewModel)
         {
-            _navigationService = DependencyResolver.Resolve<INavigationService>();
+            _navigationService = navigationService;
             _timeSlotListingViewModel = timeSlotListingViewModel;
         }
         public override void Execute(object parameter)

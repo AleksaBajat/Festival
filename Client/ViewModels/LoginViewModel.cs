@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using Client.Commands;
 using Client.Models;
+using Client.Services.Abstractions;
 using Client.State.Authentication;
 using Client.Stores;
 
@@ -36,9 +37,9 @@ namespace Client.ViewModels
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(IAuthenticator authenticator,INavigationService navigationService)
         {
-            LoginCommand = new LoginCommand(this);
+            LoginCommand = new LoginCommand(authenticator,navigationService,this);
         }
     }
 }

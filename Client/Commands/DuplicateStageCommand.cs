@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.History;
-using Client.State.Resolver;
 using Client.ViewModels;
 
 namespace Client.Commands
@@ -17,10 +13,10 @@ namespace Client.Commands
         private readonly IStageService _stageService;
         private readonly StageListingViewModel _viewModel;
 
-        public DuplicateStageCommand(StageListingViewModel viewModel)
+        public DuplicateStageCommand(INavigationService navigationService,IStageService stageService,StageListingViewModel viewModel)
         {
-            _navigationService = DependencyResolver.Resolve<INavigationService>();
-            _stageService = DependencyResolver.Resolve<IStageService>();
+            _navigationService = navigationService;
+            _stageService = stageService;
             _viewModel = viewModel;
             StageId = Guid.NewGuid();
         }
