@@ -9,25 +9,24 @@ using Client.ViewModels;
 
 namespace Client.Commands
 {
-    internal class TimeStampsCommand:BaseCommand
+    public class NavigateEditTimeSlotCommand:BaseCommand
     {
         private readonly INavigationService _navigationService;
-        private readonly StageListingViewModel _stageListingViewModel;
+        private readonly TimeSlotListingViewModel _viewModel;
 
-        public TimeStampsCommand(StageListingViewModel viewModel)
+        public NavigateEditTimeSlotCommand(TimeSlotListingViewModel viewModel)
         {
             _navigationService = DependencyResolver.Resolve<INavigationService>();
-            _stageListingViewModel = viewModel;
+            _viewModel = viewModel;
         }
-
         public override void Execute(object parameter)
         {
-            _navigationService.NavigateToTimeStamps(_stageListingViewModel.Selected.StageId);
+            _navigationService.NavigateToEditTimeStamps(_viewModel.Selected);
         }
 
         public override bool CanExecute(object parameter)
         {
-            return _stageListingViewModel.Selected != null;
+            return _viewModel.Selected != null && base.CanExecute(parameter);
         }
     }
 }

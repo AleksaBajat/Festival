@@ -13,7 +13,9 @@ namespace Client.ViewModels
 {
     internal class AddUpdateStageViewModel:BaseViewModel
     {
-        private StageViewModel _viewModel;
+        private readonly StageViewModel _viewModel;
+
+        public StageViewModel ViewModel => _viewModel;
 
         private readonly string _type;
 

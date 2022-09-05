@@ -12,7 +12,7 @@ namespace Server
     internal class TimeSlotServer
     {
         private readonly ServiceHost _host;
-        private readonly string _address = ConfigurationManager.AppSettings["stageServerAddress"];
+        private readonly string _address = ConfigurationManager.AppSettings["timeSlotServerAddress"];
 
         public TimeSlotServer()
         {

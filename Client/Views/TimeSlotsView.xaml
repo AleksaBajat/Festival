@@ -7,10 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.Resources>
-            <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -35,7 +31,7 @@
             </Grid.RowDefinitions>
 
             <Button Margin="10 35 0 10" Grid.Row="0" Command="{Binding RefreshCommand}">Refresh</Button>
-            <Button Margin="10 0 0 10" Grid.Row="1" Command="{Binding TimeStampsCommand}">Timestamps</Button>
+            <Button Margin="10 0 0 10" Grid.Row="1" Command="{Binding ArtistsCommand}">Artists</Button>
             <Button Margin="10 0 0 10" Grid.Row="2" Command="{Binding AddCommand}">Add</Button>
             <Button Margin="10 0 0 10" Grid.Row="4" Command="{Binding EditCommand}">Edit</Button>
             <Button Margin="10 0 0 10" Grid.Row="5" Command="{Binding DeleteCommand}">Delete</Button>
@@ -49,11 +45,11 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0">Festivals</TextBlock>
-            <Button Grid.Column="1" Command="{Binding NavigateAdminCommand}" Visibility="{Binding IsAdmin,Converter={StaticResource BoolToVis}}">Admin</Button>
+            <Button Grid.Column="1" Command="{Binding NavigateFestivalCommand}">Festival</Button>
             <Button Grid.Column="2" Command="{Binding LogoutCommand}">Sign Out</Button>
         </Grid>
 
-        <ListView Name="StageList" SelectedItem="{Binding Selected}" Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
+        <ListView Name="StageList" SelectedItem="{Binding Selected}" Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding TimeSlots}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -61,17 +57,24 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="TimeStamp Id">
+                    <GridViewColumn Header="Description">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding TimeSlotId, Mode=OneWay}"></TextBlock>
+                                <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding Description, Mode=OneWay}"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Name">
+                    <GridViewColumn Header="From">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding Name, Mode=OneWay}"></TextBlock>
+                                <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding From, Mode=OneWay}"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="To">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding To, Mode=OneWay}"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

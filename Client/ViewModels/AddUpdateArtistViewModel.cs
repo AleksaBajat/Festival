@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
-    internal class ArtistListingViewModel:BaseViewModel
+    internal class AddUpdateArtistViewModel:BaseViewModel
     {
-
-        public ArtistListingViewModel(Guid timeSlotId)
-        {
-
-        }
     }
 }

@@ -39,10 +39,28 @@ namespace Client.Services.Concretes
             _navigationStore.CurrentViewModel = new LoginViewModel();
         }
 
-        public void NavigateToTimeStamps(Guid id)
+        public void NavigateToTimeStamps(Guid stageId)
         {
             _navigationStore = DependencyResolver.Resolve<NavigationStore>();
-            _navigationStore.CurrentViewModel = new TimeSlotListingViewModel(id);
+            _navigationStore.CurrentViewModel = new TimeSlotListingViewModel(stageId);
+        }
+
+        public void NavigateToArtists(Guid timeSlotId)
+        {
+            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
+            _navigationStore.CurrentViewModel = new ArtistListingViewModel(timeSlotId);
+        }
+
+        public void NavigateToAddTimeStamps(TimeSlotViewModel viewModel)
+        {
+            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
+            _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(viewModel,"add");
+        }
+
+        public void NavigateToEditTimeStamps(TimeSlotViewModel viewModel)
+        {
+            _navigationStore = DependencyResolver.Resolve<NavigationStore>();
+            _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(viewModel,"edit");
         }
 
         public void NavigateToEditStage(StageViewModel viewModel)

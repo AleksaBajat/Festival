@@ -15,10 +15,16 @@ namespace Client.Services.Abstractions
 
         void NavigateToLogin();
 
-        void NavigateToTimeStamps(Guid id);
+        void NavigateToTimeStamps(Guid stageId);
 
         void NavigateToEditStage(StageViewModel viewModel);
 
         void NavigateToAddStage();
+
+        void NavigateToArtists(Guid timeSlotId);
+
+        void NavigateToAddTimeStamps(TimeSlotViewModel viewModel);
+
+        void NavigateToEditTimeStamps(TimeSlotViewModel viewModel);
     }
 }

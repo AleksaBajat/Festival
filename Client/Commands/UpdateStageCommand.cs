@@ -16,12 +16,15 @@ namespace Client.Commands
         private readonly INavigationService _navigationService;
         private readonly IStageService _stageService;
         private readonly AddUpdateStageViewModel _addUpdateStageViewModel;
+        private readonly StageViewModel _stageViewModel;
+        
 
         public UpdateStageCommand(AddUpdateStageViewModel addUpdateStageViewModel)
         {
             _addUpdateStageViewModel = addUpdateStageViewModel;
             _navigationService = DependencyResolver.Resolve<INavigationService>();
             _stageService = DependencyResolver.Resolve<IStageService>();
+            _stageViewModel = _addUpdateStageViewModel.ViewModel;
         }
 
         public override async Task ExecuteAsync(object parameter)
@@ -52,9 +55,15 @@ namespace Client.Commands
             }
         }
 
-        public override Task Undo(object parameter)
+        public override async Task Undo(object parameter)
         {
-            throw new NotImplementedException();
+            await _stageService.Update(new StageViewModel(new Stage
+            {
+                Name = _stageViewModel.Name,
+                StageId = _stageViewModel.StageId
+            }));
+
+            _navigationService.NavigateToFestival();
         }
     }
 }

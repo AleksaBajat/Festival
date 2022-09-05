@@ -24,6 +24,9 @@
             <DataTemplate DataType="{x:Type vms:TimeSlotListingViewModel}">
                 <views:TimeSlotsView></views:TimeSlotsView>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AddUpdateTimeSlotViewModel}">
+                <views:AddUpdateTimeSlotView></views:AddUpdateTimeSlotView>
+            </DataTemplate>
         </Grid.Resources>
         
         <ContentControl Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"></ContentControl>

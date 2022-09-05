@@ -12,7 +12,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace Client.ViewModels
 {
-    internal class StageListingViewModel:BaseViewModel
+    public class StageListingViewModel:BaseViewModel
     {
         private readonly ObservableCollection<StageViewModel> _stages;
 
@@ -83,7 +83,7 @@ namespace Client.ViewModels
             LogoutCommand = new LogoutCommand();
             RefreshCommand = new RefreshStagesCommand(_stages);
             NavigateAdminCommand = new NavigateAdminCommand();
-            TimeStampsCommand = new TimeStampsCommand(this);
+            TimeStampsCommand = new NavigateTimeSlotsCommand(this);
             DuplicateCommand = new DuplicateStageCommand(this);
             DeleteCommand = new DeleteStageCommand(this);
             EditCommand = new NavigateEditStageCommand(this);

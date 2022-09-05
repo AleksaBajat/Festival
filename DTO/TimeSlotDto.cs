@@ -8,7 +8,9 @@ namespace DTO
 {
     public class TimeSlotDto
     {
-        public int TimeSlotId { get; set; }
+        public Guid TimeSlotId { get; set; }
+
+        public Guid StageId { get; set; }
 
         public string Description { get; set; }
 

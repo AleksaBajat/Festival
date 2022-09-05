@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.ServiceModel;
 using System.Threading.Tasks;
+using Common.Faults;
+using Context;
+using Context.Models;
 using Contracts;
 using DTO;
 
@@ -10,24 +13,140 @@ namespace Server
 {
     internal class TimeSlotHandler:ITimeSlotHandler
     {
+        private readonly object _lock = new object();
+
         public Task Add(TimeSlotDto entity)
         {
-            throw new NotImplementedException();
+            using (FestivalContext context = new FestivalContext())
+            {
+                TimeSlot timeSlot = ConvertToContextModel(entity);
+
+                var existing = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
+
+                context.TimeSlots.Add(timeSlot);
+                
+                context.SaveChanges();
+
+                return Task.CompletedTask;
+            }
         }
 
-        public Task Delete(TimeSlotDto entity)
+        public Task Delete(TimeSlotDto entity, bool confirmed = false)
         {
-            throw new NotImplementedException();
+            lock (_lock)
+            {
+                using (FestivalContext context = new FestivalContext())
+                {
+                    var timeSlot = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
+
+                    if (!confirmed)
+                    {
+                        if (timeSlot == null)
+                        {
+                            return Task.FromException(new KeyNotFoundException($"Time slot with id:{entity.TimeSlotId} was not found in database."));
+                        }
+
+                        if (DateTime.Compare(entity.Version, timeSlot.Version) < 0 && timeSlot.IsDeleted == false)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Delete on modified time slot conflict."));
+                        }
+
+                        if (timeSlot.IsDeleted == true)
+                        {
+                            return Task.CompletedTask;
+                        }
+                    }
+
+                    timeSlot.IsDeleted = true;
+
+                    context.SaveChanges();
+
+                    return Task.CompletedTask;
+                }
+            }
         }
 
-        public Task Update(TimeSlotDto entity)
+        public Task Update(TimeSlotDto entity, bool confirmed = false)
         {
-            throw new NotImplementedException();
+            lock (_lock)
+            {
+                using (FestivalContext context = new FestivalContext())
+                {
+                    var timeSlot = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
+
+
+                    if (!confirmed)
+                    {
+                        if (timeSlot == null)
+                        {
+                            return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                        }
+
+                        if (timeSlot.IsDeleted == true)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Update on deleted stage conflict."));
+                        }
+
+                        if (DateTime.Compare(entity.Version, timeSlot.Version) < 0)
+                        {
+                            throw new FaultException<ConflictFault>(new ConflictFault("Update on modified stage conflict."));
+                        }
+                    }
+
+                    timeSlot.IsDeleted = false;
+                    timeSlot.Description = entity.Description;
+                    timeSlot.From = entity.From;
+                    timeSlot.To = entity.To;
+                    timeSlot.Version = DateTime.Now;
+
+                    context.SaveChanges();
+
+                    return Task.CompletedTask;
+                }
+            }
         }
 
-        public Task<List<TimeSlotDto>> GetAll()
+        public async Task<List<TimeSlotDto>> GetAll(Guid stageId)
         {
-            throw new NotImplementedException();
+            using (FestivalContext context = new FestivalContext())
+            {
+                List<TimeSlot> timeSlots = context.TimeSlots.Where(ts => ts.IsDeleted == false && ts.StageId == stageId).ToList();
+
+                List<TimeSlotDto> result = new List<TimeSlotDto>();
+
+                foreach (var timeSlot in timeSlots)
+                {
+                    result.Add(ConvertToTransferModel(timeSlot));
+                }
+
+                return await Task.FromResult(result);
+            }
+        }
+
+        private TimeSlotDto ConvertToTransferModel(TimeSlot timeSlot)
+        {
+            return new TimeSlotDto
+            {
+                Description = timeSlot.Description,
+                From = timeSlot.From,
+                To = timeSlot.To,
+                Version = timeSlot.Version,
+                StageId = timeSlot.StageId,
+                TimeSlotId = timeSlot.TimeSlotId
+            };
+        }
+
+        private TimeSlot ConvertToContextModel(TimeSlotDto entity)
+        {
+            return new TimeSlot
+            {
+                Description = entity.Description,
+                From = entity.From,
+                Version = entity.Version,
+                To = entity.To,
+                StageId = entity.StageId,
+                TimeSlotId = entity.TimeSlotId
+            };
         }
     }
 }

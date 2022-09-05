@@ -54,7 +54,12 @@ namespace Client.Commands
 
         public override async Task Undo(object parameter)
         {
-            throw new NotImplementedException();
+             await _stageService.Add(new(new Stage
+            {
+                StageId = StageId
+            }));
+
+            _navigationService.NavigateToFestival();
         }
     }
 }

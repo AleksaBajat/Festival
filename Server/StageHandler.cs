@@ -67,19 +67,30 @@ namespace Server
 
                     stage.IsDeleted = false;
 
-                    var duplicateStage = new Stage
-                    {
-                        StageId = entity.NewId,
-                        Name = stage.Name,
-                        Version = DateTime.Now,
-                        TimeSlots = stage.TimeSlots.ToList()
-                    };
+                    var existing = context.Stages.FirstOrDefault(s => s.StageId == entity.NewId);
 
-                    context.Stages.Add(duplicateStage);
+                    if (existing == null)
+                    {
+                        var duplicateStage = new Stage
+                        {
+                            StageId = entity.NewId,
+                            Name = stage.Name,
+                            Version = DateTime.Now,
+                            TimeSlots = stage.TimeSlots.ToList()
+                        };
+
+                        context.Stages.Add(duplicateStage);
+                    }
+                    else
+                    {
+                        existing.IsDeleted = false;
+                    }
+
+                    
 
                     context.SaveChanges();
 
-                    return Task.FromResult(duplicateStage.StageId);
+                    return Task.CompletedTask;
                 }
             }
         }

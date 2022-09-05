@@ -8,11 +8,12 @@ using DTO;
 
 namespace Contracts
 {
+    [ServiceContract]
     public interface ITimeSlotHandler
     {
         [OperationContract] Task Add(TimeSlotDto entity);
-        [OperationContract] Task Delete(TimeSlotDto entity);
-        [OperationContract] Task Update(TimeSlotDto entity);
-        [OperationContract] Task<List<TimeSlotDto>> GetAll();
+        [OperationContract] Task Delete(TimeSlotDto entity, bool confirmed = false);
+        [OperationContract] Task Update(TimeSlotDto entity, bool confirmed = false);
+        [OperationContract] Task<List<TimeSlotDto>> GetAll(Guid stageId);
     }
 }

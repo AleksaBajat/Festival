@@ -7,7 +7,7 @@ using Client.Models;
 
 namespace Client.ViewModels
 {
-    internal class TimeSlotViewModel:BaseViewModel
+    public class TimeSlotViewModel:BaseViewModel
     {
         private readonly TimeSlot _timeSlot;
 
@@ -16,6 +16,10 @@ namespace Client.ViewModels
         public DateTime From => _timeSlot.From;
 
         public DateTime To => _timeSlot.To;
+
+        public Guid StageId => _timeSlot.StageId;
+
+        public Guid TimeSlotId => _timeSlot.TimeSlotId;
 
         public DateTime Version => _timeSlot.Version;
 

@@ -114,20 +114,27 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\AddStageCommand.cs" />
+    <Compile Include="Commands\AddTimeSlotCommand.cs" />
     <Compile Include="Commands\AsyncBaseCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\DeleteStageCommand.cs" />
+    <Compile Include="Commands\DeleteTimeSlotCommand.cs" />
     <Compile Include="Commands\DuplicateStageCommand.cs" />
+    <Compile Include="Commands\UpdateTimeSlotCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NavigateAddStageCommand.cs" />
+    <Compile Include="Commands\NavigateAddTimeSlotCommand.cs" />
     <Compile Include="Commands\NavigateAdminCommand.cs" />
+    <Compile Include="Commands\NavigateArtistsCommand.cs" />
     <Compile Include="Commands\NavigateEditStageCommand.cs" />
+    <Compile Include="Commands\NavigateEditTimeSlotCommand.cs" />
     <Compile Include="Commands\NavigateFestivalCommand.cs" />
     <Compile Include="Commands\RedoPreviousCommand.cs" />
     <Compile Include="Commands\RefreshStagesCommand.cs" />
+    <Compile Include="Commands\RefreshTimeSlotsCommand.cs" />
     <Compile Include="Commands\RegisterCommand.cs" />
-    <Compile Include="Commands\TimeSlotsCommand.cs" />
+    <Compile Include="Commands\NavigateTimeSlotsCommand.cs" />
     <Compile Include="Commands\UndoBaseCommand.cs" />
     <Compile Include="Commands\UndoPreviousCommand.cs" />
     <Compile Include="Commands\UpdateStageCommand.cs" />
@@ -143,18 +150,21 @@
     <Compile Include="Services\Abstractions\INavigationService.cs" />
     <Compile Include="Services\Abstractions\IRegisterService.cs" />
     <Compile Include="Services\Abstractions\IStageService.cs" />
-    <Compile Include="Services\Abstractions\ITimeStampService.cs" />
+    <Compile Include="Services\Abstractions\ITimeSlotService.cs" />
     <Compile Include="Services\Concretes\AuthenticateService.cs" />
     <Compile Include="Services\Concretes\NavigationService.cs" />
     <Compile Include="Services\Concretes\RegisterService.cs" />
     <Compile Include="Services\Concretes\StageService.cs" />
+    <Compile Include="Services\Concretes\TimeSlotService.cs" />
     <Compile Include="State\Authentication\Authenticator.cs" />
     <Compile Include="State\Authentication\IAuthenticator.cs" />
     <Compile Include="State\History\History.cs" />
     <Compile Include="State\History\IHistory.cs" />
     <Compile Include="State\Resolver\DependencyResolver.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="ViewModels\AddUpdateArtistViewModel.cs" />
     <Compile Include="ViewModels\AddUpdateStageViewModel.cs" />
+    <Compile Include="ViewModels\AddUpdateTimeSlotViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\ArtistListingViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -167,8 +177,14 @@
     <Compile Include="Views\AddUpdateStageView.xaml.cs">
       <DependentUpon>AddUpdateStageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddUpdateTimeSlotView.xaml.cs">
+      <DependentUpon>AddUpdateTimeSlotView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArtistsView.xaml.cs">
+      <DependentUpon>ArtistsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FestivalView.xaml.cs">
       <DependentUpon>FestivalView.xaml</DependentUpon>
@@ -196,7 +212,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddUpdateTimeSlotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminView.xaml" />
+    <Page Include="Views\ArtistsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FestivalView.xaml" />
     <Page Include="Views\LoginView.xaml" />
     <Page Include="Views\TimeSlotsView.xaml">

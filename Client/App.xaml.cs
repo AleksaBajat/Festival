@@ -31,6 +31,7 @@ namespace Client
             _container = new WindsorContainer();
 
             _container.Register(Component.For<NavigationStore>().LifestyleSingleton());
+            _container.Register(Component.For<ITimeSlotService>().ImplementedBy<TimeSlotService>().LifestyleSingleton());
             _container.Register(Component.For<IStageService>().ImplementedBy<StageService>().LifestyleSingleton());
             _container.Register(Component.For<IAuthenticateService>().ImplementedBy<AuthenticateService>().LifestyleSingleton());
             _container.Register(Component.For<INavigationService>().ImplementedBy<NavigationService>().LifestyleSingleton());
