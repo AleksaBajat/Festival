@@ -21,6 +21,8 @@ namespace Client.ViewModels
 
         public string Surname => _artist.Surname;
 
+        public DateTime Version => _artist.Version;
+
         public ArtistViewModel(Artist artist)
         {
             _artist = artist;

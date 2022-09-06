@@ -65,7 +65,7 @@ namespace Client.ViewModels
                 AddOrUpdateCommand = new UpdateStageCommand(navigationService,stageService,this);
             }
 
-            LogoutCommand = new LogoutCommand(authenticator);
+            LogoutCommand = new LogoutCommand(authenticator,navigationService);
             NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
         }
     }

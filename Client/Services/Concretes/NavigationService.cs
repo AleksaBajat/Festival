@@ -68,6 +68,16 @@ namespace Client.Services.Concretes
             _navigationStore.CurrentViewModel = new AddUpdateTimeSlotViewModel(_authenticator,this,_timeSlotService,viewModel,"edit");
         }
 
+        public void NavigateToAddArtist(ArtistViewModel viewModel)
+        {
+            _navigationStore.CurrentViewModel = new AddUpdateArtistViewModel(_authenticator,this, _artistService,viewModel,"add");
+        }
+
+        public void NavigateToEditArtist(ArtistViewModel viewModel)
+        {
+            _navigationStore.CurrentViewModel = new AddUpdateArtistViewModel(_authenticator,this, _artistService,viewModel, "edit");
+        }
+
         public void NavigateToEditStage(StageViewModel viewModel)
         {
             _navigationStore.CurrentViewModel = new AddUpdateStageViewModel(_authenticator,this,_stageService,viewModel, "edit");

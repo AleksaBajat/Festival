@@ -13,6 +13,8 @@ namespace Client.Models
 
         public string Surname { get; set; }
 
+        public DateTime Version { get; set; }
+
         public Artist(){
 
         }

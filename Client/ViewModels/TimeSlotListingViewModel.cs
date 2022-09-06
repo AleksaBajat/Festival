@@ -55,7 +55,7 @@ namespace Client.ViewModels
 
             RefreshCommand = new RefreshTimeSlotsCommand(timeSlotService,_timeSlots, stageId);
             NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
-            LogoutCommand = new LogoutCommand(authenticator);
+            LogoutCommand = new LogoutCommand(authenticator,navigationService);
             ArtistsCommand = new NavigateArtistsCommand(navigationService,this);
             DeleteCommand = new DeleteTimeSlotCommand(timeSlotService,navigationService,this);
             AddCommand = new NavigateAddTimeSlotCommand(navigationService,stageId);

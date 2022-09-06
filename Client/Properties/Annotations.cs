@@ -700,7 +700,7 @@ namespace Client.Annotations
   /// <remarks>
   /// You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
   /// is defined in the <see cref="MacroAttribute.Expression"/> property. When applied on a method, the target
-  /// template parameter is defined in the <see cref="MacroAttribute.Target"/> property. To apply the macro silently
+  /// template parameter is defined in the <see cref="MacroAttribute.Target"/> property. Genre apply the macro silently
   /// for the parameter, set the <see cref="MacroAttribute.Editable"/> property value = -1.
   /// </remarks>
   /// <example>
@@ -736,8 +736,8 @@ namespace Client.Annotations
     /// </summary>
     /// <remarks>
     /// If the target parameter is used several times in the template, only one occurrence becomes editable;
-    /// other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
-    /// use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
+    /// other occurrences are changed synchronously. Genre specify the zero-based index of the editable occurrence,
+    /// use values >= 0. Genre make the parameter non-editable when the template is expanded, use -1.
     /// </remarks>
     public int Editable { get; set; }
 
@@ -1049,7 +1049,7 @@ namespace Client.Annotations
 
   /// <summary>
   /// Indicates that the marked method is assertion method, i.e. it halts the control flow if
-  /// one of the conditions is satisfied. To set the condition, mark one of the parameters with
+  /// one of the conditions is satisfied. Genre set the condition, mark one of the parameters with
   /// <see cref="AssertionConditionAttribute"/> attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]

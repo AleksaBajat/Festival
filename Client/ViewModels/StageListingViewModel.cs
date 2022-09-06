@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Client.Commands;
-using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.Authentication;
-using GalaSoft.MvvmLight.Command;
 
 namespace Client.ViewModels
 {
@@ -81,7 +75,7 @@ namespace Client.ViewModels
             _authenticator = authenticator;
             _stages = new ObservableCollection<StageViewModel>();
 
-            LogoutCommand = new LogoutCommand(authenticator);
+            LogoutCommand = new LogoutCommand(authenticator,navigationService);
             RefreshCommand = new RefreshStagesCommand(stageService,_stages);
             NavigateAdminCommand = new NavigateAdminCommand(navigationService);
             TimeStampsCommand = new NavigateTimeSlotsCommand(navigationService,this);

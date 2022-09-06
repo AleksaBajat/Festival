@@ -57,7 +57,7 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Description">
+                    <GridViewColumn Header="Name">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding Description, Mode=OneWay}"></TextBlock>
@@ -71,7 +71,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="To">
+                    <GridViewColumn Header="Genre">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" HorizontalAlignment="Center" Text="{Binding To, Mode=OneWay}"></TextBlock>

@@ -29,5 +29,9 @@ namespace Client.Services.Abstractions
         void NavigateToAddTimeStamps(TimeSlotViewModel viewModel);
 
         void NavigateToEditTimeStamps(TimeSlotViewModel viewModel);
+
+        void NavigateToAddArtist(ArtistViewModel viewModel);
+
+        void NavigateToEditArtist(ArtistViewModel viewModel);
     }
 }

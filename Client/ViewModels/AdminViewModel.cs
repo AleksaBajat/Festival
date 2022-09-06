@@ -71,7 +71,7 @@ namespace Client.ViewModels
         public AdminViewModel(IRegisterService registerService,IAuthenticator authenticator,INavigationService navigationService)
         {
             RegisterCommand = new RegisterCommand(registerService,this);
-            LogoutCommand = new LogoutCommand(authenticator);
+            LogoutCommand = new LogoutCommand(authenticator,navigationService);
             NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
         }
     }

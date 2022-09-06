@@ -71,7 +71,7 @@ namespace Client.ViewModels
         {
             _viewModel = viewModel;
 
-            LogoutCommand = new LogoutCommand(authenticator);
+            LogoutCommand = new LogoutCommand(authenticator,navigationService);
             NavigateFestivalCommand = new NavigateFestivalCommand(navigationService);
             _from = viewModel.From;
             _to = viewModel.To;
