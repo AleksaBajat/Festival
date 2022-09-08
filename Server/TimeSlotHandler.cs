@@ -8,12 +8,14 @@ using Context;
 using Context.Models;
 using Contracts;
 using DTO;
+using log4net;
 
 namespace Server
 {
     internal class TimeSlotHandler:ITimeSlotHandler
     {
         private readonly object _lock = new object();
+        private readonly ILog _log = LogManager.GetLogger(nameof(TimeSlotHandler));
 
         public Task Add(TimeSlotDto entity)
         {
@@ -27,6 +29,8 @@ namespace Server
                 
                 context.SaveChanges();
 
+
+                _log.Info("Added Time Slot");
                 return Task.CompletedTask;
             }
         }
@@ -37,31 +41,41 @@ namespace Server
             {
                 using (FestivalContext context = new FestivalContext())
                 {
-                    var timeSlot = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
-
-                    if (!confirmed)
+                    try
                     {
-                        if (timeSlot == null)
+                        var timeSlot = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
+
+                        if (!confirmed)
                         {
-                            return Task.FromException(new KeyNotFoundException($"Time slot with id:{entity.TimeSlotId} was not found in database."));
+                            if (timeSlot == null)
+                            {
+                                return Task.FromException(new KeyNotFoundException($"Time slot with id:{entity.TimeSlotId} was not found in database."));
+                            }
+
+                            if (DateTime.Compare(entity.Version, timeSlot.Version) < 0 && timeSlot.IsDeleted == false)
+                            {
+                                throw new FaultException<ConflictFault>(new ConflictFault("Delete on modified time slot conflict."));
+                            }
+
+                            if (timeSlot.IsDeleted == true)
+                            {
+                                return Task.CompletedTask;
+                            }
                         }
 
-                        if (DateTime.Compare(entity.Version, timeSlot.Version) < 0 && timeSlot.IsDeleted == false)
-                        {
-                            throw new FaultException<ConflictFault>(new ConflictFault("Delete on modified time slot conflict."));
-                        }
+                        timeSlot.IsDeleted = true;
 
-                        if (timeSlot.IsDeleted == true)
-                        {
-                            return Task.CompletedTask;
-                        }
+                        context.SaveChanges();
+
+                        _log.Info("Deleted Time Slot");
+
+                        return Task.CompletedTask;
                     }
-
-                    timeSlot.IsDeleted = true;
-
-                    context.SaveChanges();
-
-                    return Task.CompletedTask;
+                    catch
+                    {
+                        _log.Warn("Conflict Delete Time Slot");
+                        return Task.CompletedTask;
+                    }
                 }
             }
         }
@@ -72,36 +86,46 @@ namespace Server
             {
                 using (FestivalContext context = new FestivalContext())
                 {
-                    var timeSlot = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
-
-
-                    if (!confirmed)
+                    try
                     {
-                        if (timeSlot == null)
+                        var timeSlot = context.TimeSlots.FirstOrDefault(s => s.TimeSlotId == entity.TimeSlotId);
+
+
+                        if (!confirmed)
                         {
-                            return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                            if (timeSlot == null)
+                            {
+                                return Task.FromException(new KeyNotFoundException($"Stage with id:{entity.StageId} was not found in database."));
+                            }
+
+                            if (timeSlot.IsDeleted == true)
+                            {
+                                throw new FaultException<ConflictFault>(new ConflictFault("Update on deleted stage conflict."));
+                            }
+
+                            if (DateTime.Compare(entity.Version, timeSlot.Version) < 0)
+                            {
+                                throw new FaultException<ConflictFault>(new ConflictFault("Update on modified stage conflict."));
+                            }
                         }
 
-                        if (timeSlot.IsDeleted == true)
-                        {
-                            throw new FaultException<ConflictFault>(new ConflictFault("Update on deleted stage conflict."));
-                        }
+                        timeSlot.IsDeleted = false;
+                        timeSlot.Description = entity.Description;
+                        timeSlot.From = entity.From;
+                        timeSlot.To = entity.To;
+                        timeSlot.Version = DateTime.Now;
 
-                        if (DateTime.Compare(entity.Version, timeSlot.Version) < 0)
-                        {
-                            throw new FaultException<ConflictFault>(new ConflictFault("Update on modified stage conflict."));
-                        }
+                        context.SaveChanges();
+
+
+                        _log.Info("Updated Time Slot");
+                        return Task.CompletedTask;
                     }
-
-                    timeSlot.IsDeleted = false;
-                    timeSlot.Description = entity.Description;
-                    timeSlot.From = entity.From;
-                    timeSlot.To = entity.To;
-                    timeSlot.Version = DateTime.Now;
-
-                    context.SaveChanges();
-
-                    return Task.CompletedTask;
+                    catch
+                    {
+                        _log.Warn("Conflict Update Time Slot");
+                        return Task.CompletedTask;
+                    }
                 }
             }
         }
@@ -119,6 +143,7 @@ namespace Server
                     result.Add(ConvertToTransferModel(timeSlot));
                 }
 
+                _log.Info("Retrieved Time Slots");
                 return await Task.FromResult(result);
             }
         }

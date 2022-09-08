@@ -65,7 +65,6 @@ namespace Client.ViewModels
 
         public ICommand RegisterCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
-
         public ICommand NavigateFestivalCommand { get; set; }
 
         public AdminViewModel(IRegisterService registerService,IAuthenticator authenticator,INavigationService navigationService)

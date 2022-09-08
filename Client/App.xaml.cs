@@ -8,6 +8,8 @@ using Client.State.Authentication;
 using Client.Stores;
 using Client.ViewModels;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace Client
 {
     /// <summary>
@@ -16,11 +18,10 @@ namespace Client
     public partial class App
     {
         private WindsorContainer _container;
-        private readonly Festival _festival;
 
         public App()
         {
-            _festival = new Festival("Yolo Festival");
+            new Festival("Yolo Festival");
         }
         
         protected override void OnStartup(StartupEventArgs e)
@@ -28,7 +29,6 @@ namespace Client
             base.OnStartup(e);
 
             _container = new WindsorContainer();
-
             _container.Register(Component.For<NavigationStore>().LifestyleSingleton());
             _container.Register(Component.For<IArtistService>().ImplementedBy<ArtistService>().LifestyleSingleton());
             _container.Register(Component.For<ITimeSlotService>().ImplementedBy<TimeSlotService>().LifestyleSingleton());

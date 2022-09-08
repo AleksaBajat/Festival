@@ -2,7 +2,9 @@
 using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.History;
+using Client.State.Logging;
 using Client.ViewModels;
+using log4net;
 
 namespace Client.Commands
 {
@@ -11,6 +13,7 @@ namespace Client.Commands
         private readonly INavigationService _navigationService;
         private readonly IStageService _stageService;
         private readonly StageListingViewModel _viewModel;
+        private readonly ILog _log = LogHelper.GetLogger();
 
         public DeleteStageCommand(INavigationService navigationService,IStageService stageService,StageListingViewModel viewModel)
         {
@@ -38,6 +41,7 @@ namespace Client.Commands
             }
             finally
             {
+                _log.Info("Executed Delete Stage Command.");
                 _navigationService.NavigateToFestival();
             }
         }
@@ -53,6 +57,8 @@ namespace Client.Commands
             {
                 StageId = StageId
             }));
+
+             _log.Info("Undo - Executed Delete Stage Command");
 
             _navigationService.NavigateToFestival();
         }

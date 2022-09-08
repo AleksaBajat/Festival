@@ -12,6 +12,8 @@ namespace Client.Services.Abstractions
     public interface IStageService:IEntityService<StageViewModel>
     {
         Task GetAll(ObservableCollection<StageViewModel> collection);
+
+        Task Search(ObservableCollection<StageViewModel> collection, string parameter);
         Task Duplicate(StageViewModel stage,Guid newId);
     }
 }

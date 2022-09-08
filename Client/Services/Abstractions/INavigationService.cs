@@ -24,6 +24,10 @@ namespace Client.Services.Abstractions
 
         void NavigateToAddStage();
 
+        void NavigateToLogs();
+
+        void NavigateToProfile();
+
         void NavigateToArtists(Guid timeSlotId);
 
         void NavigateToAddTimeStamps(TimeSlotViewModel viewModel);

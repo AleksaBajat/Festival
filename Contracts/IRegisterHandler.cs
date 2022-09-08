@@ -10,5 +10,8 @@ namespace Contracts
     {
         [OperationContract]
         Task<bool> Register(string username,string password, string name, string lastName, bool isAdmin);
+
+        [OperationContract]
+        Task ChangePassword(string username, string password);
     }
 }

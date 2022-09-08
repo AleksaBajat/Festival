@@ -3,12 +3,15 @@ using System.Threading.Tasks;
 using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.History;
+using Client.State.Logging;
 using Client.ViewModels;
+using log4net;
 
 namespace Client.Commands
 {
     internal class DuplicateStageCommand:UndoBaseCommand
     {
+        private readonly ILog _log = LogHelper.GetLogger();
         private readonly INavigationService _navigationService;
         private readonly IStageService _stageService;
         private readonly StageListingViewModel _viewModel;
@@ -42,6 +45,7 @@ namespace Client.Commands
             }
             finally
             {
+                _log.Info("Executed Duplicate Stage Command");
                 _navigationService.NavigateToFestival();
             }
         }
@@ -57,6 +61,8 @@ namespace Client.Commands
             {
                 StageId = StageId
             }));
+
+            _log.Info("Undo - Executed Duplicate Stage Command");
 
             _navigationService.NavigateToFestival();
         }

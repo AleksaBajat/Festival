@@ -7,14 +7,16 @@ using log4net;
 
 namespace Client.Commands
 {
-    internal class RefreshStagesCommand : AsyncBaseCommand
+    internal class SearchStagesCommand:AsyncBaseCommand
     {
         private readonly ILog _log = LogHelper.GetLogger();
         private ObservableCollection<StageViewModel> _collection;
         private IStageService _stageService;
+        private StageListingViewModel _viewModel;
 
-        public RefreshStagesCommand(IStageService stageService,ObservableCollection<StageViewModel> collection)
+        public SearchStagesCommand(IStageService stageService, ObservableCollection<StageViewModel> collection,StageListingViewModel viewModel)
         {
+            _viewModel = viewModel;
             _collection = collection;
             _stageService = stageService;
         }
@@ -22,7 +24,12 @@ namespace Client.Commands
         public override Task ExecuteAsync(object parameter)
         {
             _log.Info("Executed Refresh Stages Command");
-            return _stageService.GetAll(_collection);
+            return _stageService.Search(_collection,_viewModel.Search);
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !string.IsNullOrEmpty(_viewModel.Search) && base.CanExecute(parameter);
         }
     }
 }

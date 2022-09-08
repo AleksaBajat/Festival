@@ -50,6 +50,9 @@
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
       <Private>True</Private>
@@ -121,13 +124,17 @@
     <Compile Include="Commands\AddTimeSlotCommand.cs" />
     <Compile Include="Commands\AsyncBaseCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\ChangePasswordCommand.cs" />
     <Compile Include="Commands\DeleteArtistCommand.cs" />
     <Compile Include="Commands\DeleteStageCommand.cs" />
     <Compile Include="Commands\DeleteTimeSlotCommand.cs" />
     <Compile Include="Commands\DuplicateStageCommand.cs" />
     <Compile Include="Commands\NavigateAddArtistCommand.cs" />
     <Compile Include="Commands\NavigateEditArtistCommand.cs" />
+    <Compile Include="Commands\NavigateLogsCommand.cs" />
+    <Compile Include="Commands\NavigateProfileCommand.cs" />
     <Compile Include="Commands\RefreshArtistsCommand.cs" />
+    <Compile Include="Commands\RefreshLogsCommand.cs" />
     <Compile Include="Commands\UpdateArtistCommand.cs" />
     <Compile Include="Commands\UpdateTimeSlotCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
@@ -154,6 +161,7 @@
     <Compile Include="Factories\LoginViewModelFactory.cs" />
     <Compile Include="Models\Festival.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Commands\SearchStagesCommand.cs" />
     <Compile Include="Services\Abstractions\IArtistService.cs" />
     <Compile Include="Services\Abstractions\IAuthenticateService.cs" />
     <Compile Include="Services\Abstractions\IEntityService.cs" />
@@ -171,6 +179,7 @@
     <Compile Include="State\Authentication\IAuthenticator.cs" />
     <Compile Include="State\History\History.cs" />
     <Compile Include="State\History\IHistory.cs" />
+    <Compile Include="State\Logging\LogHelper.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AddUpdateArtistViewModel.cs" />
     <Compile Include="ViewModels\AddUpdateStageViewModel.cs" />
@@ -179,6 +188,8 @@
     <Compile Include="ViewModels\ArtistListingViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\LogsViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\StageListingViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -205,6 +216,12 @@
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LogsView.xaml.cs">
+      <DependentUpon>LogsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TimeSlotsView.xaml.cs">
       <DependentUpon>TimeSlotsView.xaml</DependentUpon>
@@ -241,6 +258,14 @@
     </Page>
     <Page Include="Views\FestivalView.xaml" />
     <Page Include="Views\LoginView.xaml" />
+    <Page Include="Views\LogsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TimeSlotsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,7 +273,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Artist.cs" />
-    <Compile Include="Models\Credentials.cs" />
     <Compile Include="Models\Stage.cs" />
     <Compile Include="Models\TimeSlot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

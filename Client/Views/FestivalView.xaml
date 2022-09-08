@@ -5,13 +5,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Client.Views"
         mc:Ignorable="d"
-        d:DesignHeight="450" d:DesignWidth="850">
+        d:DesignHeight="500" d:DesignWidth="850">
     <Grid>
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
         </Grid.Resources>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -22,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <!--<TextBlock Visibility="{Binding IsAdmin,Converter={StaticResource BoolToVis}}" Text="Festival"></TextBlock>-->
 
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Column="1" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -49,14 +50,29 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0">Festivals</TextBlock>
             <Button Grid.Column="1" Command="{Binding NavigateAdminCommand}" Visibility="{Binding IsAdmin,Converter={StaticResource BoolToVis}}">Admin</Button>
             <Button Grid.Column="2" Command="{Binding LogoutCommand}">Sign Out</Button>
+            <Button Grid.Column="3" Command="{Binding NavigateLogsCommand}">Logs</Button>
+            <Button Grid.Column="4" Command="{Binding NavigateProfileCommand}">Profile</Button>
         </Grid>
 
-        <ListView AlternationCount="{Binding Stages.Count}" Name="StageList" SelectedItem="{Binding Selected}" Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0 15px 0 0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Command="{Binding SearchCommand}">Search</Button>
+            <TextBox Grid.Column="1" Text="{Binding Search,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+        </Grid>
+
+        <ListView AlternationCount="{Binding Stages.Count}" Name="StageList" SelectedItem="{Binding Selected}" Grid.Row="2" Grid.Column="0" Margin="0 25 0 0" ItemsSource="{Binding Stages}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

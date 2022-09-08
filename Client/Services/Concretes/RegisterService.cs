@@ -36,5 +36,17 @@ namespace Client.Services.Concretes
             }
             
         }
+
+        public async Task ChangePassword(string username, string password)
+        {
+
+            ChannelFactory<IRegisterHandler> factory = new ChannelFactory<IRegisterHandler>(new NetTcpBinding(), _endpointAddress);
+
+            var proxy = factory.CreateChannel();
+
+            await proxy.ChangePassword(username, password);
+
+            MessageBox.Show("Password changed!");
+        }
     }
 }

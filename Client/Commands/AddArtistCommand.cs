@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.Authentication;
+using Client.State.Logging;
 using Client.ViewModels;
+using log4net;
 
 namespace Client.Commands
 {
     internal class AddArtistCommand:AsyncBaseCommand
     {
+        private readonly ILog _log = LogHelper.GetLogger();
         private readonly INavigationService _navigationService;
         private readonly IArtistService _artistService;
         private readonly AddUpdateArtistViewModel _viewModel;
@@ -35,6 +38,8 @@ namespace Client.Commands
                 TimeSlotId = _viewModel.ViewModel.TimeSlotId,
                 Version = DateTime.Now
             }));
+
+            _log.Info("Executed Add Artist Command.");
 
             _navigationService.NavigateToArtists(_viewModel.ViewModel.TimeSlotId);
         }

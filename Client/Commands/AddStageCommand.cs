@@ -3,12 +3,15 @@ using System.Threading.Tasks;
 using Client.Models;
 using Client.Services.Abstractions;
 using Client.State.History;
+using Client.State.Logging;
 using Client.ViewModels;
+using log4net;
 
 namespace Client.Commands
 {
     internal class AddStageCommand:UndoBaseCommand
     {
+        private readonly ILog _log = LogHelper.GetLogger();
         private readonly INavigationService _navigationService;
         private readonly IStageService _stageService;
         private readonly AddUpdateStageViewModel _addUpdateStageViewModel;
@@ -39,6 +42,9 @@ namespace Client.Commands
             {
                 History.AddToUndo(this);
             }
+
+            _log.Info("Executed Add Stage Command.");
+
             _navigationService.NavigateToFestival();
         }
 
@@ -48,6 +54,8 @@ namespace Client.Commands
             {
                 StageId = StageId
             }));
+
+            _log.Info("Undo - Executed Add Stage Command");
 
             _navigationService.NavigateToFestival();
         }

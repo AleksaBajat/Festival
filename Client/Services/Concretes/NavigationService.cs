@@ -53,6 +53,16 @@ namespace Client.Services.Concretes
             _navigationStore.CurrentViewModel = new TimeSlotListingViewModel(_timeSlotService,this,_authenticator,stageId);
         }
 
+        public void NavigateToLogs()
+        {
+            _navigationStore.CurrentViewModel = new LogsViewModel(_authenticator, this);
+        }
+
+        public void NavigateToProfile()
+        {
+            _navigationStore.CurrentViewModel = new ProfileViewModel(_authenticator, this,_registerService);
+        }
+
         public void NavigateToArtists(Guid timeSlotId)
         {
             _navigationStore.CurrentViewModel = new ArtistListingViewModel(_authenticator,this,_artistService,timeSlotId);

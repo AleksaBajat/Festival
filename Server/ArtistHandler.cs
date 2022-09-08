@@ -8,12 +8,14 @@ using Context;
 using Context.Models;
 using Contracts;
 using DTO;
+using log4net;
 
 namespace Server
 {
     internal class ArtistHandler : IArtistHandler
     {
         private readonly object _lock = new object();
+        private readonly ILog _log = LogManager.GetLogger(nameof(StageHandler));
 
         public Task Add(ArtistDto entity)
         {
@@ -27,6 +29,7 @@ namespace Server
 
                 context.SaveChanges();
 
+                _log.Info("Added Artist");
                 return Task.CompletedTask;
             }
         }
@@ -50,34 +53,43 @@ namespace Server
             {
                 using (FestivalContext context = new FestivalContext())
                 {
-                    var artist = context.Artists.FirstOrDefault(s => s.ArtistId == entity.ArtistId);
-
-                    if (!confirmed)
+                    try
                     {
-                        if (artist == null)
+                        var artist = context.Artists.FirstOrDefault(s => s.ArtistId == entity.ArtistId);
+
+                        if (!confirmed)
                         {
-                            return Task.FromException(
-                                new KeyNotFoundException(
-                                    $"Time slot with id:{entity.TimeSlotId} was not found in database."));
+                            if (artist == null)
+                            {
+                                return Task.FromException(
+                                    new KeyNotFoundException(
+                                        $"Time slot with id:{entity.TimeSlotId} was not found in database."));
+                            }
+
+                            if (DateTime.Compare(entity.Version, artist.Version) < 0 && artist.IsDeleted == false)
+                            {
+                                throw new FaultException<ConflictFault>(
+                                    new ConflictFault("Delete on modified time slot conflict."));
+                            }
+
+                            if (artist.IsDeleted == true)
+                            {
+                                return Task.CompletedTask;
+                            }
                         }
 
-                        if (DateTime.Compare(entity.Version, artist.Version) < 0 && artist.IsDeleted == false)
-                        {
-                            throw new FaultException<ConflictFault>(
-                                new ConflictFault("Delete on modified time slot conflict."));
-                        }
+                        artist.IsDeleted = true;
 
-                        if (artist.IsDeleted == true)
-                        {
-                            return Task.CompletedTask;
-                        }
+                        context.SaveChanges();
+
+                        _log.Info("Deleted Artist");
+                        return Task.CompletedTask;
                     }
-
-                    artist.IsDeleted = true;
-
-                    context.SaveChanges();
-
-                    return Task.CompletedTask;
+                    catch
+                    {
+                        _log.Warn("Conflict Delete Artist");
+                        return Task.CompletedTask;
+                    }
                 }
             }
         }
@@ -88,41 +100,50 @@ namespace Server
             {
                 using (FestivalContext context = new FestivalContext())
                 {
-                    var artist = context.Artists.FirstOrDefault(s => s.ArtistId == entity.ArtistId);
-
-
-                    if (!confirmed)
+                    try
                     {
-                        if (artist == null)
+                        var artist = context.Artists.FirstOrDefault(s => s.ArtistId == entity.ArtistId);
+
+
+                        if (!confirmed)
                         {
-                            return Task.FromException(
-                                new KeyNotFoundException(
-                                    $"Stage with id:{entity.ArtistId} was not found in database."));
+                            if (artist == null)
+                            {
+                                return Task.FromException(
+                                    new KeyNotFoundException(
+                                        $"Stage with id:{entity.ArtistId} was not found in database."));
+                            }
+
+                            if (artist.IsDeleted == true)
+                            {
+                                throw new FaultException<ConflictFault>(
+                                    new ConflictFault("Update on deleted stage conflict."));
+                            }
+
+                            if (DateTime.Compare(entity.Version, artist.Version) < 0)
+                            {
+                                throw new FaultException<ConflictFault>(
+                                    new ConflictFault("Update on modified stage conflict."));
+                            }
                         }
 
-                        if (artist.IsDeleted == true)
-                        {
-                            throw new FaultException<ConflictFault>(
-                                new ConflictFault("Update on deleted stage conflict."));
-                        }
+                        artist.IsDeleted = false;
+                        artist.Name = entity.Name;
+                        artist.Genre = entity.Genre;
+                        artist.Surname = entity.Surname;
+                        artist.TimeSlotId = entity.TimeSlotId;
+                        artist.Version = DateTime.Now;
 
-                        if (DateTime.Compare(entity.Version, artist.Version) < 0)
-                        {
-                            throw new FaultException<ConflictFault>(
-                                new ConflictFault("Update on modified stage conflict."));
-                        }
+                        context.SaveChanges();
+
+                        _log.Info("Updated Artist");
+                        return Task.CompletedTask;
                     }
-
-                    artist.IsDeleted = false;
-                    artist.Name = entity.Name;
-                    artist.Genre = entity.Genre;
-                    artist.Surname = entity.Surname;
-                    artist.TimeSlotId = entity.TimeSlotId;
-                    artist.Version = DateTime.Now;
-
-                    context.SaveChanges();
-
-                    return Task.CompletedTask;
+                    catch
+                    {
+                        _log.Warn("Conflict Update Artist");
+                        return Task.CompletedTask;
+                    }
                 }
             }
         }
@@ -139,6 +160,7 @@ namespace Server
                     result.Add(ConvertToTransferModel(artist));
                 }
 
+                _log.Info("Retrieved Artists");
                 return await Task.FromResult(result);
             }
         }

@@ -1,12 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Client.Models;
 using Client.Services.Abstractions;
+using Client.State.Logging;
 using Client.ViewModels;
+using log4net;
 
 namespace Client.Commands
 {
     public class AddTimeSlotCommand:AsyncBaseCommand
     {
+        private readonly ILog _log = LogHelper.GetLogger();
         private readonly INavigationService _navigationService;
         private readonly ITimeSlotService _timeSlotService;
         private readonly AddUpdateTimeSlotViewModel _addUpdateTimeSlotViewModel;
@@ -26,6 +29,8 @@ namespace Client.Commands
                 To = _addUpdateTimeSlotViewModel.To,
                 StageId = _addUpdateTimeSlotViewModel.ViewModel.StageId
             }));
+
+            _log.Info("Executed Add Time Slot Command");
 
             _navigationService.NavigateToTimeStamps(_addUpdateTimeSlotViewModel.ViewModel.StageId);
         }

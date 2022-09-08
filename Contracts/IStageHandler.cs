@@ -17,5 +17,7 @@ namespace Contracts
         [OperationContract] [FaultContract(typeof(ConflictFault))] Task Delete(StageDto entity, bool confirmed = false);
         [OperationContract] [FaultContract(typeof(ConflictFault))] Task Update(StageDto entity, bool confirmed = false);
         [OperationContract] Task<List<StageDto>> GetAll();
+
+        [OperationContract] Task<List<StageDto>> Search(string parameter);
     }
 }

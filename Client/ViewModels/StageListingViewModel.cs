@@ -31,6 +31,7 @@ namespace Client.ViewModels
                 ((UndoBaseCommand)DeleteCommand).OnCanExecuteChanged();
                 ((UndoBaseCommand)DuplicateCommand).OnCanExecuteChanged();
                 ((BaseCommand)EditCommand).OnCanExecuteChanged();
+               
             }
         }
 
@@ -50,7 +51,25 @@ namespace Client.ViewModels
             }
         }
 
+        private string _search;
+
+        public string Search
+        {
+            get
+            {
+                return _search;
+            }
+            set
+            {
+                _search = value;
+                ((BaseCommand)SearchCommand).OnCanExecuteChanged();
+                OnPropertyChanged(Search);
+            }
+        }
+
         public ICommand NavigateAdminCommand { get; set; }
+
+        public ICommand NavigateLogsCommand { get; set; }
 
         public ICommand LogoutCommand { get; set; }
 
@@ -70,6 +89,11 @@ namespace Client.ViewModels
 
         public ICommand RedoCommand { get; set; }
 
+        public ICommand SearchCommand { get; set; }
+
+        public ICommand NavigateProfileCommand { get; set; }
+
+
         public StageListingViewModel(IAuthenticator authenticator,IStageService stageService,INavigationService navigationService)
         {
             _authenticator = authenticator;
@@ -83,8 +107,11 @@ namespace Client.ViewModels
             DeleteCommand = new DeleteStageCommand(navigationService,stageService,this);
             EditCommand = new NavigateEditStageCommand(navigationService,this);
             AddCommand = new NavigateAddStageCommand(navigationService);
+            NavigateLogsCommand = new NavigateLogsCommand(navigationService);
             UndoCommand = new UndoPreviousCommand();
             RedoCommand = new RedoPreviousCommand();
+            SearchCommand = new SearchStagesCommand(stageService,_stages,this);
+            NavigateProfileCommand = new NavigateProfileCommand(navigationService);
 
             ((AsyncBaseCommand)UndoCommand).OnCanExecuteChanged();
             ((AsyncBaseCommand)RedoCommand).OnCanExecuteChanged();

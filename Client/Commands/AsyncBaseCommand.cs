@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Client.State.Logging;
+using log4net;
 
 namespace Client.Commands
 {
@@ -18,6 +20,8 @@ namespace Client.Commands
 
         public override async void Execute(object parameter)
         {
+            
+
             IsExecuting = true;
 
             try

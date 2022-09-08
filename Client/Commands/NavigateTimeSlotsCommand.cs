@@ -1,10 +1,13 @@
 ﻿using Client.Services.Abstractions;
+using Client.State.Logging;
 using Client.ViewModels;
+using log4net;
 
 namespace Client.Commands
 {
     public class NavigateTimeSlotsCommand:BaseCommand
     {
+        private readonly ILog _log = LogHelper.GetLogger();
         private readonly INavigationService _navigationService;
         private readonly StageListingViewModel _stageListingViewModel;
 
@@ -16,6 +19,7 @@ namespace Client.Commands
 
         public override void Execute(object parameter)
         {
+            _log.Info("Executed Navigate To Time Slots View Command");
             _navigationService.NavigateToTimeStamps(_stageListingViewModel.Selected.StageId);
         }
 

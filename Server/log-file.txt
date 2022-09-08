@@ -1,0 +1,67 @@
+2022-09-08 23:56:52,595 [3] INFO  StageHandler - Retrieved Stages
+2022-09-09 00:36:59,701 [12] INFO  StageHandler - Retrieved Stages
+2022-09-09 00:50:09,899 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 00:50:47,574 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 00:51:37,757 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:13,815 [12] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:17,475 [3] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:06:19,025 [9] INFO  StageHandler - Retrieved Artists
+2022-09-09 01:06:22,541 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:25,480 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:28,239 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:29,386 [8] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:31,588 [9] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:32,981 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:35,108 [9] INFO  StageHandler - Duplicated Stage
+2022-09-09 01:06:35,208 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:38,950 [9] INFO  StageHandler - Updated Stage
+2022-09-09 01:06:38,959 [9] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:41,174 [8] INFO  StageHandler - Duplicated Stage
+2022-09-09 01:06:41,187 [8] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:06:42,896 [9] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:08:44,675 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:08:47,939 [6] INFO  StageHandler - Added Stage
+2022-09-09 01:08:48,065 [6] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:08:49,489 [7] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:08:52,690 [14] INFO  TimeSlotHandler - Added Time Slot
+2022-09-09 01:08:52,696 [14] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:08:56,802 [12] INFO  TimeSlotHandler - Updated Time Slot
+2022-09-09 01:08:56,815 [14] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:08:58,273 [14] INFO  TimeSlotHandler - Deleted Time Slot
+2022-09-09 01:08:58,277 [14] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:09:00,839 [6] INFO  TimeSlotHandler - Added Time Slot
+2022-09-09 01:09:00,844 [6] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 01:09:02,018 [14] INFO  StageHandler - Retrieved Artists
+2022-09-09 01:09:05,517 [14] INFO  StageHandler - Added Artist
+2022-09-09 01:09:05,522 [13] INFO  StageHandler - Retrieved Artists
+2022-09-09 01:09:08,983 [12] INFO  StageHandler - Updated Artist
+2022-09-09 01:09:08,988 [12] INFO  StageHandler - Retrieved Artists
+2022-09-09 01:09:11,312 [13] INFO  StageHandler - Deleted Artist
+2022-09-09 01:09:11,317 [12] INFO  StageHandler - Retrieved Artists
+2022-09-09 01:09:13,485 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:09:17,268 [14] INFO  StageHandler - Retrieved Stages (Search)
+2022-09-09 01:09:18,790 [6] INFO  StageHandler - Retrieved Stages (Search)
+2022-09-09 01:09:20,331 [14] INFO  StageHandler - Retrieved Stages (Search)
+2022-09-09 01:09:22,179 [6] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:09:30,863 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:09:33,481 [6] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:09:37,227 [6] INFO  StageHandler - Deleted Stage
+2022-09-09 01:09:37,231 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:09:56,126 [10] INFO  StageHandler - Added Stage
+2022-09-09 01:09:56,147 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:09:59,184 [10] INFO  StageHandler - Added Stage
+2022-09-09 01:09:59,191 [10] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:10:01,797 [10] INFO  StageHandler - Deleted Stage
+2022-09-09 01:10:01,802 [10] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:10:02,390 [10] INFO  StageHandler - Deleted Stage
+2022-09-09 01:10:02,394 [11] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:10:09,914 [10] INFO  StageHandler - Deleted stage un-deleted.
+2022-09-09 01:10:09,920 [10] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:10:10,439 [10] INFO  StageHandler - Deleted stage un-deleted.
+2022-09-09 01:10:10,445 [13] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:10:53,369 [14] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:11:18,670 [11] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:11:21,929 [9] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:11:23,492 [7] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:11:24,815 [7] INFO  StageHandler - Retrieved Stages
+2022-09-09 01:11:28,145 [4] INFO  StageHandler - Retrieved Stages

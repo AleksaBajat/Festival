@@ -9,16 +9,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using Client.Models;
 using Client.Services.Abstractions;
+using Client.State.Logging;
 using Client.ViewModels;
 using Common.Faults;
 using Contracts;
 using DTO;
+using log4net;
 
 namespace Client.Services.Concretes
 {
     internal class ArtistService:IArtistService
     {
         private readonly string _endpointAddress = ConfigurationManager.AppSettings["artistServerAddress"];
+        private readonly ILog _log = LogHelper.GetLogger();
         public async Task Add(ArtistViewModel entity)
         {
             ChannelFactory<IArtistHandler> factory = new ChannelFactory<IArtistHandler>(new NetTcpBinding(), _endpointAddress);
@@ -47,6 +50,7 @@ namespace Client.Services.Concretes
                 if (MessageBox.Show("The record you attempted to delete was modified by another user after you got the original values. The delete operation was canceled. If you still want to delete this record, click 'Yes' button. Otherwise click 'No'.",
                         "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    _log.Warn("Resolved Artist Delete Conflict");
                     await proxy.Delete(model, true);
                 }
             }
@@ -70,6 +74,7 @@ namespace Client.Services.Concretes
                 if (MessageBox.Show("The record you attempted to edit was modified by another user after you got the original values. The edit operation was canceled. If you still want to edit this record, click 'Yes' button. Otherwise click 'No'.",
                         "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    _log.Warn("Resolved Artist Update Conflict");
                     await proxy.Update(model, true);
                 }
             }
@@ -120,7 +125,7 @@ namespace Client.Services.Concretes
                 Name = entity.Name,
                 Surname = entity.Surname,
                 TimeSlotId = entity.TimeSlotId,
-                Version = entity.Version
+                Version = entity.Version != default ? entity.Version : DateTime.Now
             };
         }
     }
