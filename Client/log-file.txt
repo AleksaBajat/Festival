@@ -251,3 +251,23 @@
 2022-09-09 01:11:27,171 [1] INFO  C:\Users\Korisnik\Desktop\FestivalGit\Festival\Client\Commands\NavigateAddStageCommand.cs - Executed Navigate To Add Stage View Command
 2022-09-09 01:11:28,142 [1] INFO  C:\Users\Korisnik\Desktop\FestivalGit\Festival\Client\Commands\NavigateFestivalCommand.cs - Executed Navigate To Festivals View Command
 2022-09-09 01:11:28,142 [1] INFO  C:\Users\Korisnik\Desktop\FestivalGit\Festival\Client\Commands\RefreshStagesCommand.cs - Executed Refresh Stages Command
+2022-09-09 16:14:48,870 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\LoginCommand.cs - Executed Login Command
+2022-09-09 16:14:57,154 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateFestivalCommand.cs - Executed Navigate To Festivals View Command
+2022-09-09 16:14:57,158 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshStagesCommand.cs - Executed Refresh Stages Command
+2022-09-09 16:15:01,908 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateAdminCommand.cs - Executed Navigate To Admin View Command
+2022-09-09 16:15:03,059 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateFestivalCommand.cs - Executed Navigate To Festivals View Command
+2022-09-09 16:15:03,060 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshStagesCommand.cs - Executed Refresh Stages Command
+2022-09-09 16:15:09,865 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshStagesCommand.cs - Executed Refresh Stages Command
+2022-09-09 16:20:02,259 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\LoginCommand.cs - Executed Login Command
+2022-09-09 16:20:03,168 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateFestivalCommand.cs - Executed Navigate To Festivals View Command
+2022-09-09 16:20:03,172 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshStagesCommand.cs - Executed Refresh Stages Command
+2022-09-09 16:20:05,807 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateAdminCommand.cs - Executed Navigate To Admin View Command
+2022-09-09 16:22:02,811 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\LoginCommand.cs - Executed Login Command
+2022-09-09 16:22:04,270 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateFestivalCommand.cs - Executed Navigate To Festivals View Command
+2022-09-09 16:22:04,273 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshStagesCommand.cs - Executed Refresh Stages Command
+2022-09-09 16:22:12,744 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateTimeSlotsCommand.cs - Executed Navigate To Time Slots View Command
+2022-09-09 16:22:12,745 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshTimeSlotsCommand.cs - Executed Refresh Time Slots Command
+2022-09-09 16:22:14,478 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\NavigateArtistsCommand.cs - Executed Navigate To Artists Command
+2022-09-09 16:22:14,480 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\RefreshArtistsCommand.cs - Executed Refresh Artists Command
+2022-09-09 16:22:16,017 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\LogoutCommand.cs - Executed Logout Command
+2022-09-09 16:51:45,700 [1] INFO  C:\Users\PC\Desktop\Festival\Client\Commands\LoginCommand.cs - Executed Login Command

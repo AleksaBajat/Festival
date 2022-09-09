@@ -22,10 +22,6 @@ namespace DTO
         [DataMember]
         public DateTime To { get; set; }
         [DataMember]
-        public DateTime Version {
-            get
-            {
-                return DateTime.Now;
-            } set; } 
+        public DateTime Version { get; set; } = DateTime.Now;
     }
 }

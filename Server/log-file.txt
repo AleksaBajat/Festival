@@ -65,3 +65,10 @@
 2022-09-09 01:11:23,492 [7] INFO  StageHandler - Retrieved Stages
 2022-09-09 01:11:24,815 [7] INFO  StageHandler - Retrieved Stages
 2022-09-09 01:11:28,145 [4] INFO  StageHandler - Retrieved Stages
+2022-09-09 16:14:57,236 [5] INFO  StageHandler - Retrieved Stages
+2022-09-09 16:15:03,072 [6] INFO  StageHandler - Retrieved Stages
+2022-09-09 16:15:09,871 [6] INFO  StageHandler - Retrieved Stages
+2022-09-09 16:20:03,240 [12] INFO  StageHandler - Retrieved Stages
+2022-09-09 16:22:04,345 [3] INFO  StageHandler - Retrieved Stages
+2022-09-09 16:22:12,785 [5] INFO  TimeSlotHandler - Retrieved Time Slots
+2022-09-09 16:22:14,512 [3] INFO  StageHandler - Retrieved Artists

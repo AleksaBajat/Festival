@@ -80,6 +80,8 @@ namespace Context.Migrations
                     }
                 });
             }
+
+            context.SaveChanges();
         }
     }
 }

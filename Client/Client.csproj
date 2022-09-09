@@ -157,8 +157,6 @@
     <Compile Include="Components\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Factories\IViewModelFactory.cs" />
-    <Compile Include="Factories\LoginViewModelFactory.cs" />
     <Compile Include="Models\Festival.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Commands\SearchStagesCommand.cs" />
@@ -178,7 +176,6 @@
     <Compile Include="State\Authentication\Authenticator.cs" />
     <Compile Include="State\Authentication\IAuthenticator.cs" />
     <Compile Include="State\History\History.cs" />
-    <Compile Include="State\History\IHistory.cs" />
     <Compile Include="State\Logging\LogHelper.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AddUpdateArtistViewModel.cs" />

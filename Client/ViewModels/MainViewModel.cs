@@ -1,6 +1,4 @@
 using Client.Services.Abstractions;
-using Client.State.Authentication;
-using Client.Stores;
 
 namespace Client.ViewModels
 {

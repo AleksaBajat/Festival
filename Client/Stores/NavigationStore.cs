@@ -1,6 +1,4 @@
 using System;
-using Client.Factories;
-using Client.State.Authentication;
 using Client.ViewModels;
 
 namespace Client.Stores
