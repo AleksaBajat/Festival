@@ -22,4 +22,5 @@ This is MVVM (Model View ViewModel) Client/Server application in WCF (Windows Co
 
 ## Run
 
-Open the solution using Visual Studio. Run both projects (Optionally you can set them to start at the same time).
+1. Use git to pull the whole repository `git clone https://github.com/AleksaBajat/Festival.git`
+2. Open the solution using Visual Studio. Run both projects (Optionally you can set them to start at the same time).
